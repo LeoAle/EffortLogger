@@ -140,8 +140,8 @@ public class AdminControl {
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write(line);
             writer.newLine();
+            writer.write(line);
             writer.close();
         } catch (IOException e) {
             System.err.println("Error appending data to file: " + e.getMessage());
