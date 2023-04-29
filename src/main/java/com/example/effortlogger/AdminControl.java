@@ -35,7 +35,7 @@ public class AdminControl {
     @FXML
     private Label adminErrorMsg;
 
-    String fileName = "credentials.csv";
+    private final String fileName = "credentials.csv";
 
     public void changeSceneMainMenu(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -147,7 +147,6 @@ public class AdminControl {
             System.err.println("Error appending data to file: " + e.getMessage());
         }
     }
-
     private String encryptPassword(String password) {
         byte[] bytes = password.getBytes();
         byte[] encryptedBytes = Base64.getEncoder().encode(bytes);
