@@ -12,8 +12,8 @@
             <Font name="Calisto MT Bold" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="153.0" layoutY="155.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
-      <Button layoutX="38.0" layoutY="91.0" mnemonicParsing="false" text="New User" />
+      <Button layoutX="153.0" layoutY="155.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Logout" />
+      <Button layoutX="38.0" layoutY="91.0" mnemonicParsing="false" onAction="#changeAdminSceneNewUserButtonPushed" text="New User" />
       <Button layoutX="140.0" layoutY="91.0" mnemonicParsing="false" text="Modify User" />
       <Button layoutX="255.0" layoutY="91.0" mnemonicParsing="false" text="New Project" />
    </children>

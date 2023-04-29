@@ -117,6 +117,7 @@ public class HelloController {
         window.setScene(adminViewScene);
         window.show();
     }
+
     public void changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("EffortConsole.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
