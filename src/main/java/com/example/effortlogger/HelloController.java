@@ -34,7 +34,6 @@ public class HelloController {
     void onLoginButtonClick(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         if (username.isEmpty()) {
             errorMsg.setText("Username is empty.");
         } else if (!verifyCredentials("credentials.csv", username, password)) {
@@ -66,6 +65,11 @@ public class HelloController {
         popupStage.show();
     }
 
+    private String decryptPassword(String encryptedPassword) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encryptedPassword);
+        return new String(decodedBytes);
+    }
+
     /**
      *
      * @param password
@@ -91,7 +95,7 @@ public class HelloController {
 
                 String userName = columns[0].trim();
                 String password = columns[1].trim();
-
+                password = decryptPassword(password);
                 if (userName.equals(inputUserName) && isValidPassword(inputPassword) && password.equals(inputPassword)) {
                     return true;
                 }
