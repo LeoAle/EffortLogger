@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Hashtable;
 
 public class HelloController {
 
@@ -33,7 +37,7 @@ public class HelloController {
 
         if (username.isEmpty()) {
             errorMsg.setText("Username is empty.");
-        } else if (!(isValidPassword(password))) {
+        } else if (!verifyCredentials("credentials.csv", username, password)) {
             errorMsg.setText("Incorrect password credentials.");
         } else {
             encryptPassword();
@@ -71,10 +75,34 @@ public class HelloController {
     private boolean isValidPassword(String password) {
         String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
         return password.matches(pattern);
-
-
     }
 
+    public boolean verifyCredentials(String fileName, String inputUserName, String inputPassword) {
+        String line;
+        String[] columns;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            while ((line = br.readLine()) != null) {
+                columns = line.split(",");
+
+                // Check if the line has the expected structure: "name,password,role"
+                if (columns.length != 3) {
+                    continue;
+                }
+
+                String userName = columns[0].trim();
+                String password = columns[1].trim();
+
+                if (userName.equals(inputUserName) && isValidPassword(inputPassword) && password.equals(inputPassword)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     /**
      *
      * @param event
