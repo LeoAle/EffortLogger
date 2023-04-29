@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="206.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.AdminControl">
    <children>
       <Label layoutX="116.0" layoutY="14.0" text="Admin Tools">
@@ -14,7 +13,8 @@
          </font>
       </Label>
       <Button layoutX="153.0" layoutY="155.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
-      <Button layoutX="64.0" layoutY="91.0" mnemonicParsing="false" text="New User" />
-      <Button layoutX="225.0" layoutY="91.0" mnemonicParsing="false" text="Modify User" />
+      <Button layoutX="38.0" layoutY="91.0" mnemonicParsing="false" text="New User" />
+      <Button layoutX="140.0" layoutY="91.0" mnemonicParsing="false" text="Modify User" />
+      <Button layoutX="255.0" layoutY="91.0" mnemonicParsing="false" text="New Project" />
    </children>
 </AnchorPane>

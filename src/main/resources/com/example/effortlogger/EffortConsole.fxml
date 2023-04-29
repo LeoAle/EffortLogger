@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+  <tabs>
+    <Tab text="Effort Console">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="649.0">
+               <children>
+                  <Label layoutX="16.0" layoutY="127.0" text="1. When you you start a new activity, press the &quot;Start Activity&quot; button. " />
+                  <Button layoutX="16.0" layoutY="154.0" mnemonicParsing="false" text="Start Activity" />
+                  <Label layoutX="14.0" layoutY="192.0" text="2. Select the project, life cycle step, effort category, and deliverable from the following lists." />
+                  <Label layoutX="150.0" text="Effort Logger Console">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="16.0" layoutY="230.0" promptText="Project" />
+                  <ComboBox layoutX="113.0" layoutY="230.0" promptText="Life Cycle Step" />
+                  <ComboBox layoutX="246.0" layoutY="230.0" promptText="Effort Category" />
+                  <ComboBox layoutX="377.0" layoutY="230.0" promptText="Plan" />
+                  <Label layoutX="16.0" layoutY="284.0" text="3. Press the &quot;Stop Activity&quot; to generate an effort log entry using the attributes above." />
+                  <Button layoutX="14.0" layoutY="307.0" mnemonicParsing="false" text="Stop Activity" />
+                  <Label fx:id="ClockActivity" layoutX="150.0" layoutY="53.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="455.0" layoutY="230.0" promptText="Deliverable" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Effort Log Editor">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="185.0" text="Effort Log Editor">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="53.0" text="1. Select the Project in order to edit its Effort Log." />
+                  <ComboBox layoutX="14.0" layoutY="82.0" promptText="Project" />
+                  <Label layoutX="14.0" layoutY="115.0" text="2. Select the Effort Log Entry to be modified and make it the Current Effort Log Entry " />
+                  <ComboBox layoutX="14.0" layoutY="138.0" promptText="Effort Log Entry" />
+                  <Label layoutX="14.0" layoutY="166.0" text="3. Modify the current Effort Log Entry's attributes" />
+                  <TextField layoutX="14.0" layoutY="197.0" promptText="Date: yyyy-mm-dd" />
+                  <TextField layoutX="193.0" layoutY="197.0" promptText="Start Time: hh:mm:ss" />
+                  <TextField layoutX="371.0" layoutY="197.0" promptText="Stop Time: hh:mm:ss" />
+                  <ComboBox layoutX="14.0" layoutY="235.0" promptText="Life Cycle Step" />
+                  <ComboBox layoutX="149.0" layoutY="235.0" promptText="Effort Category" />
+                  <ComboBox layoutX="289.0" layoutY="236.0" promptText="Plan" />
+                  <ComboBox layoutX="368.0" layoutY="235.0" promptText="Deliverable" />
+                  <Label layoutX="14.0" layoutY="275.0" text="4. After modifying press &quot;Update This Entry&quot; when finished." />
+                  <Button layoutX="14.0" layoutY="303.0" mnemonicParsing="false" text="Update This Entry" />
+                  <Label layoutX="470.0" layoutY="275.0" text="4.a. Split the current entry " />
+                  <Button layoutX="470.0" layoutY="303.0" mnemonicParsing="false" text="Split This Entry" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Defect Console">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="194.0" text="Defect Console">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Definitions">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="120.0" text="Effort Logger Definitions">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Logs">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="189.0" layoutY="64.0" text="1. Select the Project in order to retrieve its logs." />
+                  <ComboBox layoutX="263.0" layoutY="91.0" promptText="Project" />
+                  <Label layoutX="228.0" text="Effort Logs">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="195.0" layoutY="134.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
+                  <ScrollBar layoutX="615.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="615.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="208.0" layoutY="158.0" mnemonicParsing="false" text="Print Logs" />
+                  <Button layoutX="313.0" layoutY="158.0" mnemonicParsing="false" text="Delete Logs" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

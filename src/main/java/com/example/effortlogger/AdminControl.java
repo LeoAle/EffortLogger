@@ -22,4 +22,6 @@ public class AdminControl {
         window.setScene(adminViewScene);
         window.show();
     }
+
+
 }
