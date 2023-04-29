@@ -37,6 +37,12 @@ public class HelloController {
             errorMsg.setText("Incorrect password credentials.");
         } else {
             encryptPassword();
+            try {
+                changeEffortSceneButtonPushed(event);
+            } catch (IOException e) {
+                System.out.println("The error is on line 43 or something!!!!!!!!!");
+                throw new RuntimeException(e);
+            }
         }
 
     }
@@ -74,8 +80,17 @@ public class HelloController {
      * @param event
      * @throws IOException
      */
-    public void  changeSceneButtonPushed(ActionEvent event) throws IOException {
+    public void  changeAdminSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("AdminControl.fxml"));
+        Scene adminViewScene = new Scene(adminViewParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(adminViewScene);
+        window.show();
+    }
+    public void  changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
+        Parent adminViewParent = FXMLLoader.load(getClass().getResource("EffortConsole.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

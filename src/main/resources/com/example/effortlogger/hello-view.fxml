@@ -25,7 +25,7 @@
          <TextField fx:id="usernameField" layoutX="110.0" layoutY="14.0" onAction="#onLoginButtonClick" promptText="Enter Username" />
          <PasswordField fx:id="passwordField" layoutX="110.0" layoutY="63.0" onAction="#onLoginButtonClick" promptText="Enter Password" />
         <Button layoutX="112.0" layoutY="127.0" onAction="#onLoginButtonClick" text="Login" />
-         <Button layoutX="204.0" layoutY="127.0" onAction="#changeSceneButtonPushed" text="Admin" />
+         <Button layoutX="204.0" layoutY="127.0" onAction="#changeAdminSceneButtonPushed" text="Admin" />
          <ImageView fitHeight="74.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@user.png" />

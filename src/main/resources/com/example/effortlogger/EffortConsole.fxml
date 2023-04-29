@@ -3,14 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="Effort Console">
       <content>
@@ -30,9 +29,9 @@
                   <ComboBox layoutX="377.0" layoutY="230.0" promptText="Plan" />
                   <Label layoutX="16.0" layoutY="284.0" text="3. Press the &quot;Stop Activity&quot; to generate an effort log entry using the attributes above." />
                   <Button layoutX="14.0" layoutY="307.0" mnemonicParsing="false" text="Stop Activity" />
-                  <Label fx:id="ClockActivity" layoutX="150.0" layoutY="53.0">
+                  <Label fx:id="ClockActivity" layoutX="227.0" layoutY="63.0" text="Clock Status">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
                   <ComboBox layoutX="455.0" layoutY="230.0" promptText="Deliverable" />
@@ -76,6 +75,8 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
+                  <Label layoutX="14.0" layoutY="45.0" text="1. Select the Project in order to edit its Effort Log." />
+                  <ComboBox layoutX="14.0" layoutY="65.0" promptText="Project" />
                </children>
             </AnchorPane>
         </content>
@@ -89,6 +90,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
+                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" text="Logout" />
                </children>
             </AnchorPane>
         </content>
@@ -97,17 +99,16 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="189.0" layoutY="64.0" text="1. Select the Project in order to retrieve its logs." />
-                  <ComboBox layoutX="263.0" layoutY="91.0" promptText="Project" />
-                  <Label layoutX="228.0" text="Effort Logs">
+                  <Label alignment="CENTER" layoutX="176.0" layoutY="82.0" text="1. Select the Project in order to retrieve its logs." />
+                  <ComboBox layoutX="262.0" layoutY="111.0" promptText="Project" />
+                  <Label layoutX="216.0" text="Effort Logs">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="195.0" layoutY="134.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
-                  <ScrollBar layoutX="615.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="615.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="208.0" layoutY="158.0" mnemonicParsing="false" text="Print Logs" />
-                  <Button layoutX="313.0" layoutY="158.0" mnemonicParsing="false" text="Delete Logs" />
+                  <Label layoutX="194.0" layoutY="154.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
+                  <Button layoutX="207.0" layoutY="178.0" mnemonicParsing="false" text="Print Logs" />
+                  <Button layoutX="312.0" layoutY="178.0" mnemonicParsing="false" text="Delete Logs" />
                </children>
             </AnchorPane>
         </content>
