@@ -44,7 +44,6 @@ public class HelloController {
             try {
                 changeEffortSceneButtonPushed(event);
             } catch (IOException e) {
-                System.out.println("The error is on line 43 or something!!!!!!!!!");
                 throw new RuntimeException(e);
             }
         }
