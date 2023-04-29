@@ -32,11 +32,15 @@
                <String fx:value="Admin" />
             </FXCollections>
          </items>
+         <value>
+            <String fx:value="User" />
+         </value>
       </ComboBox>
 
       <Label layoutX="15.0" layoutY="255.0" text="3. Select the role of the new user:" />
-      <Button layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneApplyButtonPushed" text="Apply" />
+      <Button layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneAdminNewUserApplyButtonPushed" text="Apply" />
       <Button layoutX="522.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Cancel" />
       <PasswordField fx:id="newUserPasswordField" layoutX="14.0" layoutY="210.0" />
+      <Label fx:id="adminErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="308.0" text="Incorrect password credentials." textFill="RED" visible="false" />
    </children>
 </AnchorPane>
