@@ -76,7 +76,8 @@
                      </font>
                   </Label>
                   <Label layoutX="14.0" layoutY="45.0" text="1. Select the Project in order to edit its Effort Log." />
-                  <ComboBox layoutX="14.0" layoutY="65.0" promptText="Project" />
+                  <ComboBox layoutX="14.0" layoutY="70.0" promptText="Project" />
+                  <Label layoutX="14.0" layoutY="104.0" text=" 2.a. Select a defect to modify or clear" />
                </children>
             </AnchorPane>
         </content>
