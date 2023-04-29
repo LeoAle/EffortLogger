@@ -13,7 +13,7 @@ public class AdminControl {
     /**
      * Change the scene with this button
      */
-    public void  changeSceneButtonPushed(ActionEvent event) throws IOException {
+    public void changeSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
 

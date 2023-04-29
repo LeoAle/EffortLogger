@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class EffortConsole {
-    public void  changeSceneButtonPushed(ActionEvent event) throws IOException {
+    public void changeSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
 

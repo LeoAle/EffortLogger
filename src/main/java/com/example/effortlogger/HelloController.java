@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 public class HelloController {
-
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -46,7 +45,6 @@ public class HelloController {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     /**
@@ -64,7 +62,6 @@ public class HelloController {
         popupStage.setScene(new Scene(new Label(result), 250, 50));
         popupStage.show();
     }
-
     private String decryptPassword(String encryptedPassword) {
         byte[] decodedBytes = Base64.getDecoder().decode(encryptedPassword);
         return new String(decodedBytes);
@@ -111,25 +108,23 @@ public class HelloController {
      * @param event
      * @throws IOException
      */
-    public void  changeAdminSceneButtonPushed(ActionEvent event) throws IOException {
+    public void changeAdminSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("AdminControl.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
 
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(adminViewScene);
         window.show();
     }
-    public void  changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
+    public void changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("EffortConsole.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
 
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(adminViewScene);
         window.show();
     }
-
-
 }
 
