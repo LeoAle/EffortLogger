@@ -5,17 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.Base64;
 
 public class AdminControl {
@@ -30,10 +24,31 @@ public class AdminControl {
     private PasswordField newUserPasswordField;
 
     @FXML
-    private ComboBox<String> comboBoxRoles;
+    private ComboBox<String> newUserComboBoxRoles;
 
     @FXML
-    private Label adminErrorMsg;
+    private Label adminUserNameErrorMsg;
+
+
+
+    @FXML
+    private Button searchUserName;
+    @FXML
+    private TextField modifyUserNameTextField;
+    @FXML
+    private Label modifyUserPasswordLabel;
+    @FXML
+    private PasswordField modifyUserPasswordField;
+    @FXML
+    private Label modifyUserComboBoxLabel;
+    @FXML
+    private ComboBox<String> modifyUserComboBoxRoles;
+    @FXML
+    private Button modifyUserApplyButton;
+
+    @FXML
+    private Label adminModifyNameErrorMsg;
+
 
     private final String fileName = "credentials.csv";
 
@@ -64,27 +79,27 @@ public class AdminControl {
 
     public void changeSceneAdminNewUserApplyButtonPushed(ActionEvent event) throws IOException {
         if (newUserNameTextField.getText().isEmpty()) {
-            adminErrorMsg.setVisible(true);
-            adminErrorMsg.setText("Name is empty.");
+            adminUserNameErrorMsg.setVisible(true);
+            adminUserNameErrorMsg.setText("Name is empty.");
             return;
         }
         if (doesNameExist(newUserNameTextField.getText())) {
-            adminErrorMsg.setVisible(true);
-            adminErrorMsg.setText("Name already exists.");
+            adminUserNameErrorMsg.setVisible(true);
+            adminUserNameErrorMsg.setText("Name already exists.");
             return;
         }
         if (newUserPasswordField.getText().isEmpty()) {
-            adminErrorMsg.setVisible(true);
-            adminErrorMsg.setText("Password is empty.");
+            adminUserNameErrorMsg.setVisible(true);
+            adminUserNameErrorMsg.setText("Password is empty.");
             return;
         }
         if (!(isValidPassword(newUserPasswordField.getText()))) {
-            adminErrorMsg.setVisible(true);
-            adminErrorMsg.setText("Incorrect password credentials.");
+            adminUserNameErrorMsg.setVisible(true);
+            adminUserNameErrorMsg.setText("Incorrect password credentials.");
             return;
         }
 
-        writeToFile(newUserNameTextField.getText(), newUserPasswordField.getText(), comboBoxRoles.getValue());
+        writeToFile(newUserNameTextField.getText(), newUserPasswordField.getText(), newUserComboBoxRoles.getValue());
 
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
@@ -113,6 +128,53 @@ public class AdminControl {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(adminNewUserViewScene);
+        window.show();
+    }
+
+    public void checkUserName()  {
+        if (modifyUserNameTextField.getText().isEmpty()) {
+            adminModifyNameErrorMsg.setVisible(true);
+            adminModifyNameErrorMsg.setText("Name is empty.");
+            return;
+        }
+        if (!(doesNameExist(modifyUserNameTextField.getText()))) {
+            adminModifyNameErrorMsg.setVisible(true);
+            adminModifyNameErrorMsg.setText("Name does not exist.");
+            return;
+        }
+
+        modifyUserApplyButton.setDisable(false);
+        adminModifyNameErrorMsg.setVisible(false);
+        searchUserName.setDisable(true);
+
+        modifyUserPasswordLabel.setVisible(true);
+        modifyUserPasswordField.setVisible(true);
+        modifyUserComboBoxLabel.setVisible(true);
+        modifyUserComboBoxRoles.setVisible(true);
+    }
+
+    public void changeSceneAdminModifyUserApplyButtonPushed(ActionEvent event) throws IOException {
+        if (modifyUserPasswordField.getText().isEmpty()) {
+            adminModifyNameErrorMsg.setVisible(true);
+            adminModifyNameErrorMsg.setText("Password is empty.");
+            return;
+        }
+        if (!(isValidPassword(modifyUserPasswordField.getText()))) {
+            adminModifyNameErrorMsg.setVisible(true);
+            adminModifyNameErrorMsg.setText("Incorrect password credentials.");
+            return;
+        }
+
+        replaceNameInFile(modifyUserNameTextField.getText(),
+                          modifyUserPasswordField.getText(),
+                          modifyUserComboBoxRoles.getValue());
+
+        Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Scene adminViewScene = new Scene(adminViewParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(adminViewScene);
         window.show();
     }
     /*
@@ -157,12 +219,12 @@ public class AdminControl {
     }
 
     public void writeToFile(String name, String password, String role) {
-        String line = name + "," + encryptPassword(password) + "," + role;
+        String csv_line = name + "," + encryptPassword(password) + "," + role;
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.newLine();
-            writer.write(line);
+            writer.write(csv_line);
             writer.close();
         } catch (IOException e) {
             System.err.println("Error appending data to file: " + e.getMessage());
@@ -172,6 +234,44 @@ public class AdminControl {
         byte[] bytes = password.getBytes();
         byte[] encryptedBytes = Base64.getEncoder().encode(bytes);
         return new String(encryptedBytes);
+    }
+
+    private void replaceNameInFile(String name, String password, String role) {
+        String csv_line = name + "," + encryptPassword(password) + "," + role;
+        String temp_file_name = new String("credentials_temp.csv");
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(temp_file_name));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                // Check if the line has the expected structure: "name,password,role"
+                if (columns.length != 3) {
+                    continue;
+                }
+
+                if (columns[0].trim().equals(name)) {
+                    line = csv_line;
+                }
+                writer.write(line);
+                writer.newLine();
+            }
+
+            reader.close();
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File oldFile = new File(fileName);
+        oldFile.delete();
+        
+        File newFile = new File(temp_file_name);
+        newFile.renameTo(oldFile);
     }
     /*
     ==============================
