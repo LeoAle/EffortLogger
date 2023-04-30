@@ -21,12 +21,7 @@ public class TeamLeadControl {
         this.username = username;
     }
 
-    public static void main(String[] args) throws IOException {
-        int teamNumber = 12;
-        printTeamWork(teamNumber);
-    }
-
-    public static void printTeamWork(int teamNumber) throws IOException {
+    public void printTeamWork(int teamNumber) throws IOException {
         List<String> teamUsernames = getUsernamesByTeam(teamNumber);
         List<String> projectNames = getProjectNames("data.csv");
 
@@ -35,11 +30,32 @@ public class TeamLeadControl {
             String projectFileName = projectName + ".csv";
 
             for (String username : teamUsernames) {
-                System.out.println("Username: " + username);
-                printUserWork(username, projectFileName);
+                // Skip printing logs for the team lead
+                if (!username.equals(this.username)) {
+                    boolean hasLogs = checkIfUserHasLogs(username, projectFileName);
+                    // Print logs only if the user has logs
+                    if (hasLogs) {
+                        System.out.println("Username: " + username);
+                        printUserWork(username, projectFileName);
+                    }
+                }
             }
         }
     }
+
+    public boolean checkIfUserHasLogs(String username, String projectFileName) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectFileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[1].equals(username)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public static List<String> getUsernamesByTeam(int teamNumber) throws IOException {
         List<String> usernames = new ArrayList<>();
@@ -74,33 +90,40 @@ public class TeamLeadControl {
     }
 
     public static void printUserWork(String username, String projectFileName) throws IOException {
+        List<String[]> userWorkEntries = new ArrayList<>();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(projectFileName))) {
             String line;
-
-            System.out.println("--------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
-                    "Sr. No.", "Username", "Project", "Life Cycle Step", "Effort Category", "Plan", "Deliverable", "Elapsed Time");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
 
                 if (parts[1].equals(username)) {
-                    String srNo = parts[0].trim();
-                    String project = parts[2].trim();
-                    String lifeCycleStep = parts[3].trim();
-                    String effortCategory = parts[4].trim();
-                    String plan = parts[5].trim();
-                    String deliverable = parts[6].trim();
-                    String elapsedTime = parts[7].trim();
-
-                    System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
-                            srNo, username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+                    userWorkEntries.add(parts);
                 }
             }
         }
-    }
 
+        if (!userWorkEntries.isEmpty()) {
+            System.out.println("--------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                    "Sr. No.", "Username", "Project", "Life Cycle Step", "Effort Category", "Plan", "Deliverable", "Elapsed Time");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------");
+
+            for (String[] parts : userWorkEntries) {
+                String srNo = parts[0].trim();
+                String project = parts[2].trim();
+                String lifeCycleStep = parts[3].trim();
+                String effortCategory = parts[4].trim();
+                String plan = parts[5].trim();
+                String deliverable = parts[6].trim();
+                String elapsedTime = parts[7].trim();
+
+                System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                        srNo, username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+            }
+        }
+    }
     public void changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortConsole.fxml"));
         Parent adminViewParent = loader.load();
