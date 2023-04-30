@@ -94,9 +94,13 @@ public class EffortConsole {
             elapsedTime = Duration.between(startTime, LocalDateTime.now());
             isRunning = false;
             System.out.println("stopped");
-            // Save the time in a variable and print it
-            long elapsedSeconds = elapsedTime.getSeconds();
-            System.out.println("Elapsed time: " + elapsedSeconds + " seconds");
+
+            // Save the time in a variable and print it in hours, minutes, and seconds
+            long hours = elapsedTime.toHours();
+            long minutes = elapsedTime.toMinutes() % 60;
+            long seconds = elapsedTime.getSeconds() % 60;
+            System.out.printf("Elapsed time: %02d:%02d:%02d%n", hours, minutes, seconds);
         }
     }
+
 }
