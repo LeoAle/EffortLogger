@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -57,17 +59,13 @@
                   <Label layoutX="17.0" layoutY="138.0" text="2. Select the Effort Log Entry to be modified and make it the Current Effort Log Entry " />
                   <ComboBox fx:id="effortLogEntryEditorComboBox" layoutX="17.0" layoutY="161.0" promptText="Effort Log Entry" />
                   <Label layoutX="17.0" layoutY="189.0" text="3. Modify the current Effort Log Entry's attributes" />
-                  <TextField fx:id="dateTextField" layoutX="17.0" layoutY="220.0" promptText="Date: yyyy-mm-dd" />
-                  <TextField fx:id="startTimeTextField" layoutX="196.0" layoutY="220.0" promptText="Start Time: hh:mm:ss" />
-                  <TextField fx:id="stoptimeTextField" layoutX="374.0" layoutY="220.0" promptText="Stop Time: hh:mm:ss" />
+                  <TextField fx:id="startTimeTextField" layoutX="14.0" layoutY="220.0" promptText="Time: hh:mm:ss" />
                   <ComboBox fx:id="lifeCycleStepEditorComboBox" layoutX="17.0" layoutY="258.0" promptText="Life Cycle Step" />
                   <ComboBox fx:id="effortCategoryEditorComboBox" layoutX="152.0" layoutY="258.0" promptText="Effort Category" />
                   <ComboBox fx:id="planEditorComboBox" layoutX="292.0" layoutY="259.0" promptText="Plan" />
                   <ComboBox fx:id="deliverableEditorComboBox" layoutX="371.0" layoutY="258.0" promptText="Deliverable" />
                   <Label layoutX="17.0" layoutY="298.0" text="4. After modifying press &quot;Update This Entry&quot; when finished." />
                   <Button fx:id="updateEntryButton" layoutX="17.0" layoutY="326.0" mnemonicParsing="false" onAction="#updateEntryButtonPushed" text="Update This Entry" />
-                  <Label layoutX="473.0" layoutY="298.0" text="4.a. Split the current entry " />
-                  <Button fx:id="SplitEntryButton" layoutX="473.0" layoutY="326.0" mnemonicParsing="false" onAction="#splitEntryButtonPushed" text="Split This Entry" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -105,34 +103,38 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Definitions">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="120.0" text="Effort Logger Definitions">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
-               </children>
-            </AnchorPane>
-        </content>
-      </Tab>
       <Tab text="Logs">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" layoutX="176.0" layoutY="82.0" text="1. Select the Project in order to retrieve its logs." />
-                  <ComboBox fx:id="projectLogsComboBox" layoutX="262.0" layoutY="111.0" promptText="Project" />
-                  <Label layoutX="216.0" text="Effort Logs">
+                  <Label alignment="CENTER" layoutX="176.0" layoutY="65.0" text="1. Select the Project in order to retrieve its logs." />
+                  <ComboBox fx:id="projectLogsComboBox" layoutX="262.0" layoutY="95.0" promptText="Project" />
+                  <Label layoutX="216.0" layoutY="10.0" text="Effort Logs">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="194.0" layoutY="154.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
-                  <Button fx:id="printLogsButton" layoutX="207.0" layoutY="178.0" mnemonicParsing="false" onAction="#printLogsButtonPushed" text="Print Logs" />
-                  <Button fx:id="deleteLogsButton" layoutX="312.0" layoutY="178.0" mnemonicParsing="false" onAction="#deleteLogsButtonPushed" text="Delete Logs" />
+                  <Label layoutX="194.0" layoutY="130.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
+                  <Button fx:id="printLogsButton" layoutX="207.0" layoutY="160.0" mnemonicParsing="false" onAction="#printLogsButtonPushed" text="Print Logs" />
+                  <Button fx:id="deleteLogsButton" layoutX="312.0" layoutY="160.0" mnemonicParsing="false" onAction="#deleteLogsButtonPushed" text="Delete Logs" />
+                  <TableView layoutX="15.0" layoutY="200.0" prefHeight="160.0" prefWidth="600.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Exit">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
                </children>
             </AnchorPane>
         </content>
