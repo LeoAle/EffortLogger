@@ -107,9 +107,11 @@ public class EffortConsole {
                     if (columns.length != 8) {
                         continue;
                     }
+                    if (columns[1].trim().equals(username)){
+                        String srNo = columns[0].trim();
+                        serialNumbers.add(srNo);
+                    }
 
-                    String srNo = columns[0].trim();
-                    serialNumbers.add(srNo);
                 }
             } catch (IOException e) {
                 System.out.println("Error reading the CSV file: " + csvFileName);
