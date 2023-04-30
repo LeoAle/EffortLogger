@@ -35,12 +35,18 @@ public class HelloController {
         String password = passwordField.getText();
         if (username.isEmpty()) {
             errorMsg.setText("Username is empty.");
-        } else if (!verifyCredentials("credentials.csv", username, password)) {
+        } else if (verifyCredentials("credentials.csv", username, password) == null) {
             errorMsg.setText("Incorrect password credentials.");
-        } else {
-            encryptPassword();
+        } else if (verifyCredentials("credentials.csv", username, password).equals("User")) {
             try {
                 changeEffortSceneButtonPushed(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if (verifyCredentials("credentials.csv", username, password).equals("Admin")) {
+            try {
+                changeAdminSceneButtonPushed(event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -77,7 +83,7 @@ public class HelloController {
         return password.matches(pattern);
     }
 
-    public boolean verifyCredentials(String fileName, String inputUserName, String inputPassword) {
+    public String verifyCredentials(String fileName, String inputUserName, String inputPassword) {
         String line;
         String[] columns;
 
@@ -92,16 +98,17 @@ public class HelloController {
 
                 String userName = columns[0].trim();
                 String password = columns[1].trim();
+                String role = columns[2].trim();
                 password = decryptPassword(password);
                 if (userName.equals(inputUserName) && isValidPassword(inputPassword) && password.equals(inputPassword)) {
-                    return true;
+                    return role;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
     /**
      *
