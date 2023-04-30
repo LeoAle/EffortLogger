@@ -30,12 +30,16 @@
                   <ComboBox fx:id="effortCategoryComboBox" layoutX="246.0" layoutY="237.0" promptText="Effort Category" />
                   <ComboBox fx:id="planComboBox" layoutX="377.0" layoutY="237.0" promptText="Plan" />
                   <ComboBox fx:id="deliverableComboBox" layoutX="455.0" layoutY="237.0" promptText="Deliverable" />
-                  <Rectangle fx:id="clockStatusColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="75.0" layoutX="132.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
-                  <Label fx:id="ClockStatusLabel" layoutX="227.0" layoutY="109.0" text="Clock Status" textFill="WHITE">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane layoutX="132.0" layoutY="94.0">
+                     <children>
+                        <Rectangle fx:id="clockStatusColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="75.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
+                        <Label fx:id="clockStatus" layoutX="65.0" layoutY="15.0" text="Clock is Stopped" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children></AnchorPane>
       </content>
     </Tab>

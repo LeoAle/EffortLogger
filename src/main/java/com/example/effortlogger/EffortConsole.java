@@ -5,6 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import javafx.collections.FXCollections;
@@ -24,21 +29,17 @@ import java.io.FileReader;
 import java.io.File;
 
 public class EffortConsole {
+
     @FXML
     private ComboBox<String> projectLogsComboBox;
-
     @FXML
     private ComboBox<String> projectComboBox;
-
     @FXML
     private ComboBox<String> lifeCycleStepComboBox;
-
     @FXML
     private ComboBox<String> effortCategoryComboBox;
-
     @FXML
     private ComboBox<String> planComboBox;
-
     @FXML
     private ComboBox<String> deliverableComboBox;
     @FXML
@@ -51,12 +52,29 @@ public class EffortConsole {
     private ComboBox<String> planEditorComboBox;
     @FXML
     private ComboBox<String> deliverableEditorComboBox;
+    @FXML
+    private  Rectangle clockStatusColor;
+    @FXML
+    private Label clockStatus;
+
 
     private boolean isRunning = false;
     private LocalDateTime startTime;
     private Duration elapsedTime;
-
     private String username;
+
+    //New GUI Elements
+    public ComboBox effortLogEntryEditorComboBox;
+    public TextField dateTextField;
+    public TextField startTimeTextField;
+    public TextField stoptimeTextField;
+    public Button updateEntryButton;
+    public Button SplitEntryButton;
+    public Label attributeStatusLabel;
+    public Button LogoutBtn;
+    public Button printLogsButton;
+    public Button deleteLogsButton;
+
 
     /**
      * Initializes the ComboBox objects in the user interface with the data obtained from a CSV file.
@@ -154,11 +172,17 @@ public class EffortConsole {
                 System.out.println("started");
                 startTime = LocalDateTime.now();
                 isRunning = true;
-            } else {
+                //Change the color of the clock status and its message
+                clockStatus.setText("Clock is Running");
+                clockStatusColor.setFill(Color.GREEN);
+                } else {
                 // Stop the stopwatch
                 elapsedTime = Duration.between(startTime, LocalDateTime.now());
                 isRunning = false;
                 System.out.println("stopped");
+                //Change the color of the clock status and its message
+                clockStatus.setText("Clock is Stopped");
+                clockStatusColor.setFill(Color.RED);
 
                 // Save the time in a variable and print it in hours, minutes, and seconds
                 long hours = elapsedTime.toHours();
@@ -238,8 +262,6 @@ public class EffortConsole {
      * @param event the ActionEvent associated with the button click
      * @throws IOException if an IO error occurs while processing the button click
      */
-
-
     public void printLogsButtonPushed(ActionEvent event) throws IOException {
         if (projectLogsComboBox.getValue() == null) {
             System.out.println("ProjectLogsComboBox is empty. Please select a project.");
