@@ -15,7 +15,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 public class TeamLeadControl {
 
     public TableView teamLogsTeamLeaderTableView;
@@ -23,8 +25,26 @@ public class TeamLeadControl {
     public Button effortLoggerTeamLeaderButton;
     public Button printTableTeamLeaderButton;
     String username;
+    int teamNumber;
+
     public void setUsername(String username) {
         this.username = username;
+        this.teamNumber = getTeamNumberOfUser(username);
+    }
+
+    public int getTeamNumberOfUser(String username) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("credentials.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(username)) {
+                    return Integer.parseInt(parts[3]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public void printTeamWork(int teamNumber) throws IOException {
@@ -34,6 +54,12 @@ public class TeamLeadControl {
         for (String projectName : projectNames) {
             System.out.println("Project: " + projectName);
             String projectFileName = projectName + ".csv";
+
+            // Check if the project file exists, create it if not
+            Path projectFilePath = Paths.get(projectFileName);
+            if (!Files.exists(projectFilePath)) {
+                Files.createFile(projectFilePath);
+            }
 
             for (String username : teamUsernames) {
                 // Skip printing logs for the team lead
@@ -154,9 +180,14 @@ public class TeamLeadControl {
         window.show();
     }
 
-    public void printTableButtonPushed(ActionEvent event){
-        System.out.println("Hello");
+    public void printTableButtonPushed(ActionEvent event) {
+        try {
+            printTeamWork(teamNumber);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
     
     
 }
