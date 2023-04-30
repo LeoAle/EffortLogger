@@ -23,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class EffortConsole {
+    @FXML
+    private ComboBox<String> projectLogsComboBox;
 
     @FXML
     private ComboBox<String> projectComboBox;
@@ -38,6 +40,17 @@ public class EffortConsole {
 
     @FXML
     private ComboBox<String> deliverableComboBox;
+    @FXML
+    private ComboBox<String> projectEditorComboBox;
+    @FXML
+    private ComboBox<String> lifeCycleStepEditorComboBox;
+    @FXML
+    private ComboBox<String> effortCategoryEditorComboBox;
+    @FXML
+    private ComboBox<String> planEditorComboBox;
+    @FXML
+    private ComboBox<String> deliverableEditorComboBox;
+
     private boolean isRunning = false;
     private LocalDateTime startTime;
     private Duration elapsedTime;
@@ -57,8 +70,18 @@ public class EffortConsole {
             effortCategoryComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[2])));
             planComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[3])));
             deliverableComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[4])));
+            fillProjectLogsComboBox();
+            fillEditorComboBoxes();
         }
     }
+    public void fillEditorComboBoxes() {
+        projectEditorComboBox.setItems(projectComboBox.getItems());
+        lifeCycleStepEditorComboBox.setItems(lifeCycleStepComboBox.getItems());
+        effortCategoryEditorComboBox.setItems(effortCategoryComboBox.getItems());
+        planEditorComboBox.setItems(planComboBox.getItems());
+        deliverableEditorComboBox.setItems(deliverableComboBox.getItems());
+    }
+
 
     /**
      * Sets the username for the current user.
@@ -94,6 +117,9 @@ public class EffortConsole {
         }
 
         return data;
+    }
+    public void fillProjectLogsComboBox() {
+        projectLogsComboBox.setItems(projectComboBox.getItems());
     }
 
     /**
