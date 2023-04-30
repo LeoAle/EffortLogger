@@ -51,6 +51,7 @@ public class HelloController {
                 throw new RuntimeException(e);
             }
         }
+
     }
 
     /**
