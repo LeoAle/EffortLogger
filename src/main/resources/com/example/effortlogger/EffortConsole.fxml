@@ -76,20 +76,27 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="45.0" text="1.a. Select the Project " />
+                  <Label layoutX="15.0" layoutY="45.0" text="1.a. Select the Project " />
                   <ComboBox layoutX="14.0" layoutY="70.0" promptText="Project" />
-                  <Label layoutX="143.0" layoutY="45.0" text=" 1.b. Select a defect" />
-                  <Button layoutX="552.0" layoutY="339.0" mnemonicParsing="false" text="Create New Defect" />
-                  <Button layoutX="570.0" layoutY="270.0" mnemonicParsing="false" text="Modify Defect" />
-                  <Button layoutX="566.0" layoutY="307.0" mnemonicParsing="false" text="Delete Defect" />
+                  <Label layoutX="150.0" layoutY="45.0" text=" 1.b. Select a defect or create a new one" />
+                  <Button layoutX="15.0" layoutY="275.0" mnemonicParsing="false" text="Update Defect" />
+                  <Button layoutX="130.0" layoutY="275.0" mnemonicParsing="false" text="Delete Defect" />
                   <ComboBox layoutX="146.0" layoutY="70.0" promptText="Defect" />
-                  <Label layoutX="19.0" layoutY="331.0" text=" 2.a. Choose whether to Delete Defect, Modify Defect, or Create a new defect" />
-                  <Label layoutX="19.0" layoutY="117.0" text="3. Define or update the following Current Defect attributes:" />
-                  <TextField layoutX="18.0" layoutY="133.0" promptText="Defect Name or Number" />
-                  <TextArea layoutX="19.0" layoutY="168.0" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
-                  <ComboBox layoutX="14.0" layoutY="245.0" promptText="Step when injected" />
-                  <ComboBox layoutX="184.0" layoutY="245.0" promptText="Step when removed " />
-                  <ComboBox layoutX="355.0" layoutY="245.0" promptText="Defect Category" />
+                  <Label layoutX="15.0" layoutY="250.0" text="3. Update or Delete the current Defect" />
+                  <Label layoutX="15.0" layoutY="105.0" text="2.a. Define or update the following Current Defect attributes:" />
+                  <TextField layoutX="15.0" layoutY="133.0" promptText="Defect Name or Number" />
+                  <TextArea layoutX="15.0" layoutY="171.0" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
+                  <ComboBox layoutX="250.0" layoutY="133.0" promptText="Step when injected" />
+                  <ComboBox layoutX="250.0" layoutY="170.0" promptText="Step when removed " />
+                  <ComboBox layoutX="250.0" layoutY="211.0" promptText="Defect Category" />
+                  <Label layoutX="450.0" layoutY="105.0" text="2. b. Status Open or Closed:" />
+                  <Button layoutX="450.0" layoutY="133.0" mnemonicParsing="false" text="Open or Closed" />
+                  <Label layoutX="300.0" layoutY="325.0" text="These attributes have been saved:" />
+                  <Label fx:id="attributeStatusLabel" layoutX="490.0" layoutY="325.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </content>
