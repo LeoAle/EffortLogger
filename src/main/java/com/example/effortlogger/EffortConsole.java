@@ -67,6 +67,7 @@ public class EffortConsole {
     }
 
 
+
     public void changeSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
@@ -75,5 +76,9 @@ public class EffortConsole {
 
         window.setScene(adminViewScene);
         window.show();
+    }
+
+    public void startStopButtonPushed(ActionEvent event) throws IOException{
+        System.out.println("Hello");
     }
 }
