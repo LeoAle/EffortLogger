@@ -15,7 +15,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
-
+import java.time.Duration;
+import java.time.LocalDateTime;
 public class EffortConsole {
 
     @FXML
@@ -32,7 +33,9 @@ public class EffortConsole {
 
     @FXML
     private ComboBox<String> deliverableComboBox;
-
+    private boolean isRunning = false;
+    private LocalDateTime startTime;
+    private Duration elapsedTime;
     public void initialize() {
         String[][] data = parseCSV("data.csv");
 
@@ -78,7 +81,22 @@ public class EffortConsole {
         window.show();
     }
 
-    public void startStopButtonPushed(ActionEvent event) throws IOException{
-        System.out.println("Hello");
+
+
+    public void startStopButtonPushed(ActionEvent event) throws IOException {
+        if (!isRunning) {
+            // Start the stopwatch
+            System.out.println("started");
+            startTime = LocalDateTime.now();
+            isRunning = true;
+        } else {
+            // Stop the stopwatch
+            elapsedTime = Duration.between(startTime, LocalDateTime.now());
+            isRunning = false;
+            System.out.println("stopped");
+            // Save the time in a variable and print it
+            long elapsedSeconds = elapsedTime.getSeconds();
+            System.out.println("Elapsed time: " + elapsedSeconds + " seconds");
+        }
     }
 }
