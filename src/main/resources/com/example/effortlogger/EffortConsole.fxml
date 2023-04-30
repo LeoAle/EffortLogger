@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -15,26 +16,25 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="649.0">
                <children>
-                  <Label layoutX="16.0" layoutY="127.0" text="1. When you you start a new activity, press the &quot;Start Activity&quot; button. " />
-                  <Button layoutX="16.0" layoutY="154.0" mnemonicParsing="false" text="Start Activity" />
-                  <Label layoutX="14.0" layoutY="192.0" text="2. Select the project, life cycle step, effort category, and deliverable from the following lists." />
-                  <Label layoutX="150.0" text="Effort Logger Console">
+                  <Label layoutX="14.0" layoutY="277.0" text="2. Use this button to start or stop an activity" />
+                  <Button layoutX="14.0" layoutY="304.0" mnemonicParsing="false" text="Start or Stop " />
+                  <Label layoutX="14.0" layoutY="200.0" prefHeight="17.0" prefWidth="501.0" text="1. Select the Project, Life Cycle Step, Effort Category, and Deliverable from the following lists." />
+                  <Label layoutX="142.0" layoutY="14.0" text="Effort Logger Console">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="16.0" layoutY="230.0" promptText="Project" />
-                  <ComboBox layoutX="113.0" layoutY="230.0" promptText="Life Cycle Step" />
-                  <ComboBox layoutX="246.0" layoutY="230.0" promptText="Effort Category" />
-                  <ComboBox layoutX="377.0" layoutY="230.0" promptText="Plan" />
-                  <Label layoutX="16.0" layoutY="284.0" text="3. Press the &quot;Stop Activity&quot; to generate an effort log entry using the attributes above." />
-                  <Button layoutX="14.0" layoutY="307.0" mnemonicParsing="false" text="Stop Activity" />
-                  <Label fx:id="ClockActivity" layoutX="227.0" layoutY="63.0" text="Clock Status">
+                  <ComboBox fx:id="projectComboBox" layoutX="16.0" layoutY="237.0" promptText="Project" />
+                  <ComboBox fx:id="lifeCycleStepComboBox" layoutX="113.0" layoutY="237.0" promptText="Life Cycle Step" />
+                  <ComboBox fx:id="effortCategoryComboBox" layoutX="246.0" layoutY="237.0" promptText="Effort Category" />
+                  <ComboBox fx:id="planComboBox" layoutX="377.0" layoutY="237.0" promptText="Plan" />
+                  <ComboBox fx:id="deliverableComboBox" layoutX="455.0" layoutY="237.0" promptText="Deliverable" />
+                  <Rectangle fx:id="clockStatusColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="75.0" layoutX="132.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
+                  <Label fx:id="ClockStatusLabel" layoutX="227.0" layoutY="109.0" text="Clock Status" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="455.0" layoutY="230.0" promptText="Deliverable" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -42,27 +42,27 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="185.0" text="Effort Log Editor">
+                  <Label layoutX="185.0" layoutY="14.0" text="Effort Log Editor">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="53.0" text="1. Select the Project in order to edit its Effort Log." />
-                  <ComboBox layoutX="14.0" layoutY="82.0" promptText="Project" />
-                  <Label layoutX="14.0" layoutY="115.0" text="2. Select the Effort Log Entry to be modified and make it the Current Effort Log Entry " />
-                  <ComboBox layoutX="14.0" layoutY="138.0" promptText="Effort Log Entry" />
-                  <Label layoutX="14.0" layoutY="166.0" text="3. Modify the current Effort Log Entry's attributes" />
-                  <TextField layoutX="14.0" layoutY="197.0" promptText="Date: yyyy-mm-dd" />
-                  <TextField layoutX="193.0" layoutY="197.0" promptText="Start Time: hh:mm:ss" />
-                  <TextField layoutX="371.0" layoutY="197.0" promptText="Stop Time: hh:mm:ss" />
-                  <ComboBox layoutX="14.0" layoutY="235.0" promptText="Life Cycle Step" />
-                  <ComboBox layoutX="149.0" layoutY="235.0" promptText="Effort Category" />
-                  <ComboBox layoutX="289.0" layoutY="236.0" promptText="Plan" />
-                  <ComboBox layoutX="368.0" layoutY="235.0" promptText="Deliverable" />
-                  <Label layoutX="14.0" layoutY="275.0" text="4. After modifying press &quot;Update This Entry&quot; when finished." />
-                  <Button layoutX="14.0" layoutY="303.0" mnemonicParsing="false" text="Update This Entry" />
-                  <Label layoutX="470.0" layoutY="275.0" text="4.a. Split the current entry " />
-                  <Button layoutX="470.0" layoutY="303.0" mnemonicParsing="false" text="Split This Entry" />
+                  <Label layoutX="17.0" layoutY="76.0" text="1. Select the Project in order to edit its Effort Log." />
+                  <ComboBox layoutX="17.0" layoutY="105.0" promptText="Project" />
+                  <Label layoutX="17.0" layoutY="138.0" text="2. Select the Effort Log Entry to be modified and make it the Current Effort Log Entry " />
+                  <ComboBox layoutX="17.0" layoutY="161.0" promptText="Effort Log Entry" />
+                  <Label layoutX="17.0" layoutY="189.0" text="3. Modify the current Effort Log Entry's attributes" />
+                  <TextField layoutX="17.0" layoutY="220.0" promptText="Date: yyyy-mm-dd" />
+                  <TextField layoutX="196.0" layoutY="220.0" promptText="Start Time: hh:mm:ss" />
+                  <TextField layoutX="374.0" layoutY="220.0" promptText="Stop Time: hh:mm:ss" />
+                  <ComboBox layoutX="17.0" layoutY="258.0" promptText="Life Cycle Step" />
+                  <ComboBox layoutX="152.0" layoutY="258.0" promptText="Effort Category" />
+                  <ComboBox layoutX="292.0" layoutY="259.0" promptText="Plan" />
+                  <ComboBox layoutX="371.0" layoutY="258.0" promptText="Deliverable" />
+                  <Label layoutX="17.0" layoutY="298.0" text="4. After modifying press &quot;Update This Entry&quot; when finished." />
+                  <Button layoutX="17.0" layoutY="326.0" mnemonicParsing="false" text="Update This Entry" />
+                  <Label layoutX="473.0" layoutY="298.0" text="4.a. Split the current entry " />
+                  <Button layoutX="473.0" layoutY="326.0" mnemonicParsing="false" text="Split This Entry" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -91,7 +91,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" text="Logout" />
+                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
                </children>
             </AnchorPane>
         </content>
