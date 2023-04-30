@@ -41,6 +41,13 @@ public class EffortConsole {
     private boolean isRunning = false;
     private LocalDateTime startTime;
     private Duration elapsedTime;
+
+    private String username;
+
+    /**
+     * Initializes the ComboBox objects in the user interface with the data obtained from a CSV file.
+     * The ComboBox items are set from a 2D array of String values obtained by calling the parseCSV method.
+     */
     public void initialize() {
         String[][] data = parseCSV("data.csv");
 
@@ -52,11 +59,22 @@ public class EffortConsole {
             deliverableComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[4])));
         }
     }
-    private String username;
 
+    /**
+     * Sets the username for the current user.
+     *
+     * @param username the username to set
+     */
     public void setUsername(String username) {
         this.username = username;
     }
+
+    /**
+     * Parses a CSV file and returns a 2D String array containing the data.
+     *
+     * @param filename the name of the CSV file to parse
+     * @return a 2D String array containing the parsed data
+     */
     private String[][] parseCSV(String filename) {
         String[][] data = new String[5][];
 
@@ -78,8 +96,12 @@ public class EffortConsole {
         return data;
     }
 
-
-
+    /**
+     * Changes the current scene to the "hello-view.fxml" file.
+     *
+     * @param event the event that triggered this method
+     * @throws IOException if there is an error loading the FXML file
+     */
     public void changeSceneButtonPushed(ActionEvent event) throws IOException {
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
@@ -90,8 +112,14 @@ public class EffortConsole {
         window.show();
     }
 
-
-
+    /**
+     * Handles the event when the start/stop button is pushed. If all combo boxes have a selected value,
+     * starts the stopwatch if it is not already running, or stops the stopwatch and saves the elapsed time to
+     * a CSV file if it is running. If any combo box does not have a selected value, displays an error message.
+     *
+     * @param event the ActionEvent generated when the button is pushed
+     * @throws IOException if there is an error saving data to the CSV file
+     */
     public void startStopButtonPushed(ActionEvent event) throws IOException {
         if (isAllComboBoxesSelected()) {
             if (!isRunning) {
@@ -118,6 +146,12 @@ public class EffortConsole {
             System.out.println("A field is empty. Please make sure all combo boxes have a selected value.");
         }
     }
+
+    /**
+     * Checks whether all the combo boxes have a selected value or not.
+     *
+     * @return true if all combo boxes have a selected value, false otherwise.
+     */
     private boolean isAllComboBoxesSelected() {
         return projectComboBox.getValue() != null &&
                 lifeCycleStepComboBox.getValue() != null &&
@@ -125,7 +159,11 @@ public class EffortConsole {
                 planComboBox.getValue() != null &&
                 deliverableComboBox.getValue() != null;
     }
-
+    /**
+     * Saves the selected data to a CSV file with the format "projectName.csv".
+     * The data to save includes the username, project name, life cycle step, effort category,
+     * plan, deliverable, and elapsed time.
+     */
     private void saveDataToCSV() {
         String projectName = projectComboBox.getValue();
         String csvFilename = projectName + ".csv";
@@ -145,6 +183,46 @@ public class EffortConsole {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method is called when the user clicks the "Update Entry" button. It prints a message to the console and does not perform any other action.
+     *
+     * @param event the ActionEvent associated with the button click
+     * @throws IOException if an IO error occurs while processing the button click
+     */
+    public void updateEntryButtonPushed(ActionEvent event) throws IOException{
+        System.out.println("Update Entry Here!");
+    }
+
+    /**
+     * This method is called when the user clicks the "Split Entry" button. It prints a message to the console and does not perform any other action.
+     *
+     * @param event the ActionEvent associated with the button click
+     * @throws IOException if an IO error occurs while processing the button click
+     */
+    public void splitEntryButtonPushed(ActionEvent event) throws IOException{
+        System.out.println("Split Entry Here!");
+    }
+
+    /**
+     * This method is called when the user clicks the "Print Logs" button. It prints a message to the console and does not perform any other action.
+     *
+     * @param event the ActionEvent associated with the button click
+     * @throws IOException if an IO error occurs while processing the button click
+     */
+    public void printLogsButtonPushed(ActionEvent event) throws IOException{
+        System.out.println("Print Logs Here!");
+    }
+
+    /**
+     * This method is called when the user clicks the "Delete Logs" button. It prints a message to the console and does not perform any other action.
+     *
+     * @param event the ActionEvent associated with the button click
+     * @throws IOException if an IO error occurs while processing the button click
+     */
+    public void deleteLogsButtonPushed(ActionEvent event) throws IOException{
+        System.out.println("Delete Logs Here!");
     }
 
 
