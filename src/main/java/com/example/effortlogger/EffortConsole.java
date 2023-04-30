@@ -451,17 +451,19 @@ public class EffortConsole {
                             continue;
                         }
 
-                        String srNo = columns[0].trim();
-                        String username = columns[1].trim();
-                        String project = columns[2].trim();
-                        String lifeCycleStep = columns[3].trim();
-                        String effortCategory = columns[4].trim();
-                        String plan = columns[5].trim();
-                        String deliverable = columns[6].trim();
-                        String elapsedTime = columns[7].trim();
+                        if (columns[1].equals(username)) {
+                            String srNo = columns[0].trim();
+                            String username = columns[1].trim();
+                            String project = columns[2].trim();
+                            String lifeCycleStep = columns[3].trim();
+                            String effortCategory = columns[4].trim();
+                            String plan = columns[5].trim();
+                            String deliverable = columns[6].trim();
+                            String elapsedTime = columns[7].trim();
 
-                        System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
-                                srNo, username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+                            System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                                    srNo, username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+                        }
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading the CSV file: " + csvFileName);
