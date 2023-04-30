@@ -51,6 +51,13 @@ public class HelloController {
                 throw new RuntimeException(e);
             }
         }
+        else if (verifyCredentials("credentials.csv", username, password).equals("Lead")){
+            try {
+                changeLeadSceneButtonPushed(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
@@ -138,6 +145,19 @@ public class HelloController {
         window.setScene(adminViewScene);
         window.show();
     }
+    public void changeLeadSceneButtonPushed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TeamLeadControl.fxml"));
+        Parent adminViewParent = loader.load();
+        TeamLeadControl teamLeadController = loader.getController();
+        teamLeadController.setUsername(usernameField.getText());
+        Scene adminViewScene = new Scene(adminViewParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(adminViewScene);
+        window.show();
+    }
+
 
 }
 
