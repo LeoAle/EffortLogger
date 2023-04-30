@@ -13,6 +13,8 @@ import java.io.*;
 import java.util.Base64;
 
 public class AdminControl {
+
+
     /**
      * Change the scene with this button
      */
@@ -49,7 +51,11 @@ public class AdminControl {
     @FXML
     private Label adminModifyNameErrorMsg;
 
-
+    public Label newUserTeamNumberLabel;
+    public TextField newUserTeamNumberTextField;
+    @FXML
+    private TextField modifyUserTeamNumberTextField;
+    public Label modifyUserTeamNumberLabel;
     private final String fileName = "credentials.csv";
 
     public void changeSceneMainMenu(ActionEvent event) throws IOException {
@@ -99,7 +105,15 @@ public class AdminControl {
             return;
         }
 
-        writeToFile(newUserNameTextField.getText(), newUserPasswordField.getText(), newUserComboBoxRoles.getValue());
+        if (newUserTeamNumberTextField.getText().isEmpty()){
+            adminUserNameErrorMsg.setVisible(true);
+            adminUserNameErrorMsg.setText("Team Number not specified");
+        }
+
+        writeToFile(newUserNameTextField.getText(),
+                    newUserPasswordField.getText(),
+                    newUserComboBoxRoles.getValue(),
+                    newUserTeamNumberTextField.getText());
 
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
@@ -151,6 +165,8 @@ public class AdminControl {
         modifyUserPasswordField.setVisible(true);
         modifyUserComboBoxLabel.setVisible(true);
         modifyUserComboBoxRoles.setVisible(true);
+        modifyUserTeamNumberLabel.setVisible(true);
+        modifyUserTeamNumberTextField.setVisible(true);
     }
 
     public void changeSceneAdminModifyUserApplyButtonPushed(ActionEvent event) throws IOException {
@@ -164,10 +180,10 @@ public class AdminControl {
             adminModifyNameErrorMsg.setText("Incorrect password credentials.");
             return;
         }
-
         replaceNameInFile(modifyUserNameTextField.getText(),
                           modifyUserPasswordField.getText(),
-                          modifyUserComboBoxRoles.getValue());
+                          modifyUserComboBoxRoles.getValue(),
+                          modifyUserTeamNumberTextField.getText());
 
         Parent adminViewParent = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene adminViewScene = new Scene(adminViewParent);
@@ -177,6 +193,7 @@ public class AdminControl {
         window.setScene(adminViewScene);
         window.show();
     }
+
     /*
     ==============================
     End of Modify User Scene
@@ -197,8 +214,8 @@ public class AdminControl {
 
                 String[] columns = line.split(",");
 
-                // Check if the line has the expected structure: "name,password,role"
-                if (columns.length != 3) {
+                // Check if the line has the expected structure: "name,password,role,team number"
+                if (columns.length != 4) {
                     continue;
                 }
 
@@ -218,8 +235,8 @@ public class AdminControl {
         return password.matches(regex);
     }
 
-    public void writeToFile(String name, String password, String role) {
-        String csv_line = name + "," + encryptPassword(password) + "," + role;
+    public void writeToFile(String name, String password, String role, String teamNumber) {
+        String csv_line = name + "," + encryptPassword(password) + "," + role +"," + teamNumber;
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
@@ -236,8 +253,8 @@ public class AdminControl {
         return new String(encryptedBytes);
     }
 
-    private void replaceNameInFile(String name, String password, String role) {
-        String csv_line = name + "," + encryptPassword(password) + "," + role;
+    private void replaceNameInFile(String name, String password, String role, String teamNumber) {
+        String csv_line = name + "," + encryptPassword(password) + "," + role +"," + teamNumber;
         String temp_file_name = new String("credentials_temp.csv");
 
         try {
@@ -248,8 +265,8 @@ public class AdminControl {
             while ((line = reader.readLine()) != null) {
                 String[] columns = line.split(",");
 
-                // Check if the line has the expected structure: "name,password,role"
-                if (columns.length != 3) {
+                // Check if the line has the expected structure: "name,password,role,team number"
+                if (columns.length != 4) {
                     continue;
                 }
 

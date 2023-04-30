@@ -91,8 +91,8 @@ public class HelloController {
             while ((line = br.readLine()) != null) {
                 columns = line.split(",");
 
-                // Check if the line has the expected structure: "name,password,role"
-                if (columns.length != 3) {
+                // Check if the line has the expected structure: "name,password,role,team number"
+                if (columns.length != 4) {
                     continue;
                 }
 

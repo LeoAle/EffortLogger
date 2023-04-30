@@ -11,38 +11,38 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.AdminControl">
-   <children>
-      <Label layoutX="16.0" layoutY="127.0" text="1. Enter the name of the user:" />
-      <Label fx:id="modifyUserPasswordLabel" layoutX="14.0" layoutY="192.0" text="2. Enter the new password for the user:" visible="false" />
-      <Label layoutX="150.0" text="Effort Logger Admin">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <TextField fx:id="modifyUserNameTextField" layoutX="14.0" layoutY="145.0" />
-      <Label layoutX="249.0" layoutY="54.0" text="Modify User">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="modifyUserComboBoxRoles" layoutX="14.0" layoutY="273.0" prefWidth="150.0" visible="false">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="User" />
-               <String fx:value="Admin" />
-               <String fx:value="Team Lead" />
-            </FXCollections>
-         </items>
-         <value>
+   <Label layoutX="15.0" layoutY="125.0" text="1. Enter the name of the user:" />
+   <Label fx:id="modifyUserPasswordLabel" layoutX="15.0" layoutY="175.0" text="2. Enter the new password for the user:" visible="false" />
+   <Label layoutX="150.0" text="Effort Logger Admin">
+      <font>
+         <Font size="36.0" />
+      </font>
+   </Label>
+   <TextField fx:id="modifyUserNameTextField" layoutX="14.0" layoutY="145.0" />
+   <Label layoutX="249.0" layoutY="54.0" text="Modify User">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="modifyUserComboBoxRoles" layoutX="14.0" layoutY="245.0" prefWidth="150.0" visible="false">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
             <String fx:value="User" />
-         </value>
-      </ComboBox>
+            <String fx:value="Admin" />
+            <String fx:value="Team Lead" />
+         </FXCollections>
+      </items>
+      <value>
+         <String fx:value="User" />
+      </value>
+   </ComboBox>
 
-      <Label fx:id="modifyUserComboBoxLabel" layoutX="15.0" layoutY="255.0" text="3. Select the new role for the user:" visible="false" />
-      <Button fx:id="modifyUserApplyButton" disable="true" layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneAdminModifyUserApplyButtonPushed" text="Apply" />
-      <Button layoutX="522.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Cancel" />
-      <PasswordField fx:id="modifyUserPasswordField" layoutX="14.0" layoutY="210.0" visible="false" />
-      <Label fx:id="adminModifyNameErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="308.0" text="Incorrect password credentials." textFill="RED" visible="false" />
-      <Button fx:id="searchUserName" layoutX="249.0" layoutY="145.0" mnemonicParsing="false" onAction="#checkUserName" text="Search" />
-   </children>
+   <Label fx:id="modifyUserComboBoxLabel" layoutX="15.0" layoutY="225.0" text="3. Select the new role for the user:" visible="false" />
+   <Button fx:id="modifyUserApplyButton" disable="true" layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneAdminModifyUserApplyButtonPushed" text="Apply" />
+   <Button layoutX="522.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Cancel" />
+   <PasswordField fx:id="modifyUserPasswordField" layoutX="15.0" layoutY="195.0" visible="false" />
+   <Label fx:id="adminModifyNameErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="308.0" text="Incorrect password credentials." textFill="RED" visible="false" />
+   <Button fx:id="searchUserName" layoutX="249.0" layoutY="145.0" mnemonicParsing="false" onAction="#checkUserName" text="Search" />
+   <Label fx:id="modifyUserTeamNumberLabel" layoutX="15.0" layoutY="275.0" text="4. Specify the Team Number:" visible="false" />
+   <TextField fx:id="modifyUserTeamNumberTextField" layoutX="15.0" layoutY="295.0" visible="false" />
 </AnchorPane>

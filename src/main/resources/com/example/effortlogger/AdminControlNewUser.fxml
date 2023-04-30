@@ -11,37 +11,37 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.AdminControl">
-   <children>
-      <Label layoutX="16.0" layoutY="127.0" text="1. Enter the name of the new user:" />
-      <Label layoutX="14.0" layoutY="192.0" text="2. Enter the password of the new user:" />
-      <Label layoutX="150.0" text="Effort Logger Admin">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <TextField fx:id="newUserNameTextField" layoutX="14.0" layoutY="145.0" />
-      <Label layoutX="248.0" layoutY="54.0" text="New User">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="newUserComboBoxRoles" layoutX="14.0" layoutY="273.0" prefWidth="150.0">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="User" />
-               <String fx:value="Admin" />
-               <String fx:value="Team Lead" />
-            </FXCollections>
-         </items>
-         <value>
+   <Label layoutX="15.0" layoutY="125.0" text="1. Enter the name of the new user:" />
+   <Label layoutX="15.0" layoutY="175.0" text="2. Enter the password of the new user:" />
+   <Label layoutX="150.0" text="Effort Logger Admin">
+      <font>
+         <Font size="36.0" />
+      </font>
+   </Label>
+   <TextField fx:id="newUserNameTextField" layoutX="15.0" layoutY="145.0" />
+   <Label layoutX="248.0" layoutY="54.0" text="New User">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="newUserComboBoxRoles" layoutX="15.0" layoutY="245.0" prefWidth="150.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
             <String fx:value="User" />
-         </value>
-      </ComboBox>
+            <String fx:value="Admin" />
+            <String fx:value="Team Lead" />
+         </FXCollections>
+      </items>
+      <value>
+         <String fx:value="User" />
+      </value>
+   </ComboBox>
 
-      <Label layoutX="15.0" layoutY="255.0" text="3. Select the role of the new user:" />
-      <Button layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneAdminNewUserApplyButtonPushed" text="Apply" />
-      <Button layoutX="522.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Cancel" />
-      <PasswordField fx:id="newUserPasswordField" layoutX="14.0" layoutY="210.0" />
-      <Label fx:id="adminUserNameErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="308.0" text="Incorrect password credentials." textFill="RED" visible="false" />
-   </children>
+   <Label layoutX="15.0" layoutY="225.0" text="3. Select the role of the new user:" />
+   <Button layoutX="587.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneAdminNewUserApplyButtonPushed" text="Apply" />
+   <Button layoutX="522.0" layoutY="326.0" mnemonicParsing="false" onAction="#changeSceneMainMenu" text="Cancel" />
+   <PasswordField fx:id="newUserPasswordField" layoutX="15.0" layoutY="195.0" />
+   <Label fx:id="adminUserNameErrorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="308.0" text="Incorrect password credentials." textFill="RED" visible="false" />
+   <Label fx:id="newUserTeamNumberLabel" layoutX="15.0" layoutY="275.0" text="4. Specify the Team Number:" />
+   <TextField fx:id="newUserTeamNumberTextField" layoutX="15.0" layoutY="295.0" />
 </AnchorPane>
