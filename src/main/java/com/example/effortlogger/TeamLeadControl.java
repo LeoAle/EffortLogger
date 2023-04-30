@@ -155,9 +155,7 @@ public class TeamLeadControl {
     }
 
     public void printTableButtonPushed(ActionEvent event){
-        if (printTableTeamLeaderButton.isDefaultButton()){
-            System.out.println("Hello");
-        }
+        System.out.println("Hello");
     }
     
     
