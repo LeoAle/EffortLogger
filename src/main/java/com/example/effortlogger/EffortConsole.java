@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.nio.file.StandardOpenOption;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 
 public class EffortConsole {
     @FXML
@@ -237,9 +238,55 @@ public class EffortConsole {
      * @param event the ActionEvent associated with the button click
      * @throws IOException if an IO error occurs while processing the button click
      */
-    public void printLogsButtonPushed(ActionEvent event) throws IOException{
-        System.out.println("Print Logs Here!");
+
+
+    public void printLogsButtonPushed(ActionEvent event) throws IOException {
+        if (projectLogsComboBox.getValue() == null) {
+            System.out.println("ProjectLogsComboBox is empty. Please select a project.");
+        } else {
+            String projectName = projectLogsComboBox.getValue();
+            String csvFileName = projectName + ".csv";
+            File file = new File(csvFileName);
+
+            if (!file.exists()) {
+                System.out.println("There is nothing in this project: " + projectName);
+            } else {
+                try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
+                    String line;
+                    System.out.println("Logs for project: " + projectName);
+                    System.out.println("----------------------------------------------------------------------------------------------------------------");
+                    System.out.printf("%-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                            "Username", "Project", "Life Cycle Step", "Effort Category", "Plan", "Deliverable", "Elapsed Time");
+                    System.out.println("----------------------------------------------------------------------------------------------------------------");
+
+                    while ((line = br.readLine()) != null) {
+                        String[] columns = line.split(",");
+
+                        if (columns.length != 7) {
+                            continue;
+                        }
+
+                        String username = columns[0].trim();
+                        String project = columns[1].trim();
+                        String lifeCycleStep = columns[2].trim();
+                        String effortCategory = columns[3].trim();
+                        String plan = columns[4].trim();
+                        String deliverable = columns[5].trim();
+                        String elapsedTime = columns[6].trim();
+
+                        System.out.printf("%-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                                username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error reading the CSV file: " + csvFileName);
+                    e.printStackTrace();
+                }
+            }
+        }
     }
+
+
+
 
     /**
      * This method is called when the user clicks the "Delete Logs" button. It prints a message to the console and does not perform any other action.
@@ -247,9 +294,31 @@ public class EffortConsole {
      * @param event the ActionEvent associated with the button click
      * @throws IOException if an IO error occurs while processing the button click
      */
-    public void deleteLogsButtonPushed(ActionEvent event) throws IOException{
-        System.out.println("Delete Logs Here!");
+    public void deleteLogsButtonPushed(ActionEvent event) throws IOException {
+        if (projectLogsComboBox.getValue() == null) {
+            System.out.println("ProjectLogsComboBox is empty. Please select a project.");
+        } else {
+            String projectName = projectLogsComboBox.getValue();
+            String csvFileName = projectName + ".csv";
+            File file = new File(csvFileName);
+
+            if (!file.exists()) {
+                System.out.println("There is nothing in this project: " + projectName);
+            } else {
+                try {
+                    if (file.delete()) {
+                        System.out.println("All logs for project " + projectName + " have been deleted.");
+                    } else {
+                        System.out.println("An error occurred while deleting the logs for project " + projectName);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error deleting the CSV file: " + csvFileName);
+                    e.printStackTrace();
+                }
+            }
+        }
     }
+
 
 
 }
