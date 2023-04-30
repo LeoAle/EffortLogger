@@ -65,11 +65,8 @@ public class EffortConsole {
 
     //New GUI Elements
     public ComboBox effortLogEntryEditorComboBox;
-    public TextField dateTextField;
     public TextField startTimeTextField;
-    public TextField stoptimeTextField;
     public Button updateEntryButton;
-    public Button SplitEntryButton;
     public Label attributeStatusLabel;
     public Button LogoutBtn;
     public Button printLogsButton;
