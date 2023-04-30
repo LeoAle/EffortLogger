@@ -79,26 +79,26 @@
                      </font>
                   </Label>
                   <Label layoutX="15.0" layoutY="45.0" text="1.a. Select the Project " />
-                  <ComboBox layoutX="14.0" layoutY="70.0" promptText="Project" />
                   <Label layoutX="150.0" layoutY="45.0" text=" 1.b. Select a defect or create a new one" />
-                  <Button layoutX="15.0" layoutY="275.0" mnemonicParsing="false" text="Update Defect" />
-                  <Button layoutX="130.0" layoutY="275.0" mnemonicParsing="false" text="Delete Defect" />
-                  <ComboBox layoutX="146.0" layoutY="70.0" promptText="Defect" />
                   <Label layoutX="15.0" layoutY="250.0" text="3. Update or Delete the current Defect" />
-                  <Label layoutX="15.0" layoutY="105.0" text="2.a. Define or update the following Current Defect attributes:" />
-                  <TextField layoutX="15.0" layoutY="133.0" promptText="Defect Name or Number" />
-                  <TextArea layoutX="15.0" layoutY="171.0" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
-                  <ComboBox layoutX="250.0" layoutY="133.0" promptText="Step when injected" />
-                  <ComboBox layoutX="250.0" layoutY="170.0" promptText="Step when removed " />
-                  <ComboBox layoutX="250.0" layoutY="211.0" promptText="Defect Category" />
+                  <Label layoutX="22.0" layoutY="97.0" text="2.a. Define or update the following Current Defect attributes:" />
                   <Label layoutX="450.0" layoutY="105.0" text="2. b. Status Open or Closed:" />
-                  <Button layoutX="450.0" layoutY="133.0" mnemonicParsing="false" text="Open or Closed" />
                   <Label layoutX="300.0" layoutY="325.0" text="These attributes have been saved:" />
                   <Label fx:id="attributeStatusLabel" layoutX="490.0" layoutY="325.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="projectDefectConsoleComboBox" layoutX="15.0" layoutY="70.0" onAction="#projectComboBoxDefectConsole" promptText="Project" />
+                  <Button fx:id="updateDefectConsoleButton" layoutX="15.0" layoutY="275.0" mnemonicParsing="false" onAction="#updateButtonDefectConsole" text="Update Defect" />
+                  <Button fx:id="deleteDefectConsoleButton" layoutX="130.0" layoutY="275.0" mnemonicParsing="false" onAction="#deleteButtonDefectConsole" text="Delete Defect" />
+                  <ComboBox fx:id="defectDefectConsoleComboBox" layoutX="150.0" layoutY="70.0" onAction="#defectComboBoxDefectConsole" promptText="Defect" />
+                  <TextField fx:id="defectNameDefectConsoleTextField" layoutX="15.0" layoutY="133.0" onAction="#defectNameTextFieldDefectConsole" promptText="Defect Name or Number" />
+                  <TextArea fx:id="symptomsDefectConsoleTextField" layoutX="15.0" layoutY="171.0" onInputMethodTextChanged="#defectSymptomTextFieldDefectConsole" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
+                  <ComboBox fx:id="injectedDefectConsoleComboBox" layoutX="250.0" layoutY="133.0" onAction="#injectedComboBoxDefectConsole" promptText="Step when injected" />
+                  <ComboBox fx:id="removedDefectConsoleComboBox" layoutX="250.0" layoutY="170.0" onAction="#removedComboBoxDefectConsole" promptText="Step when removed " />
+                  <ComboBox fx:id="categoryDefectConsoleComboBox" layoutX="250.0" layoutY="210.0" onAction="#categoryComboBoxDefectConsole" promptText="Defect Category" />
+                  <Button fx:id="statusDefectConsoleButton" layoutX="450.0" layoutY="133.0" mnemonicParsing="false" onAction="#statusButtonDefectConsole" text="Open or Closed" />
                </children>
             </AnchorPane>
         </content>

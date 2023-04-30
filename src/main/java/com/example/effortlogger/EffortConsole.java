@@ -508,6 +508,43 @@ public class EffortConsole {
         }
     }
 
+    public void projectComboBoxDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Project Combo Box");
+    }
 
+    public void defectComboBoxDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Defect Combo Box");
+    }
+
+    public void injectedComboBoxDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Step when Injected Combo Box");
+    }
+    public void removedComboBoxDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Step when removed Combo Box");
+    }
+
+    public void categoryComboBoxDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Defect Category Combo Box");
+    }
+
+    public void statusButtonDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Open or Closed Button");
+    }
+
+    public void updateButtonDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Update Defect Button");
+    }
+
+    public void deleteButtonDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Delete Defect Button");
+    }
+
+    public void defectNameTextFieldDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Defect Name Text Field");
+    }
+
+    public void defectSymptomTextFieldDefectConsole(ActionEvent event) throws IOException{
+        System.out.println("I am the Defect Symptom Text Field");
+    }
 
 }
