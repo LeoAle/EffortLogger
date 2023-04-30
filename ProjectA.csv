@@ -1,1 +1,6 @@
-1,Bob,ProjectA,Design,Documentation,Plan B,Deliverable B,00:00:01
+1,Bob,ProjectA,Design,Testing,Plan C,Deliverable B,00:00:00
+2,Bob,ProjectA,Design,Testing,Plan C,Deliverable B,00:00:00
+3,Bob,ProjectA,Requirements,Testing,Plan C,Deliverable B,00:00:00
+4,Bob,ProjectA,Testing,Development,Plan C,Deliverable B,00:00:11
+5,Bob,ProjectA,Design,Documentation,Plan C,Deliverable B,00:00:00
+6,Bob,ProjectA,Design,Testing,Plan C,Deliverable B,00:00:00

@@ -28,8 +28,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import java.util.Arrays;
+
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EffortConsole {
 
@@ -273,8 +275,23 @@ public class EffortConsole {
         String projectName = projectComboBox.getValue();
         String csvFilename = projectName + ".csv";
 
-        // Increment record counter
-        recordCounter++;
+        // Initialize record counter
+        int recordCounter = 1;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split(",");
+                if (columns.length > 0) {
+                    String srNoStr = columns[0].trim();
+                    int srNo = Integer.parseInt(srNoStr);
+                    recordCounter = Math.max(recordCounter, srNo + 1);
+                }
+            }
+        } catch (IOException e) {
+            // File does not exist or cannot be read
+            // Ignore the error and start from 1
+        }
 
         String dataToSave = String.join(",",
                 Integer.toString(recordCounter), // Add the serial number
@@ -296,15 +313,102 @@ public class EffortConsole {
     }
 
 
+
     /**
      * This method is called when the user clicks the "Update Entry" button. It prints a message to the console and does not perform any other action.
      *
      * @param event the ActionEvent associated with the button click
      * @throws IOException if an IO error occurs while processing the button click
      */
-    public void updateEntryButtonPushed(ActionEvent event) throws IOException{
-        System.out.println("Update Entry Here!");
+    public void updateEntryButtonPushed(ActionEvent event) throws IOException {
+        Object selectedSrNoObject = effortLogEntryEditorComboBox.getValue();
+
+        if (selectedSrNoObject == null) {
+            System.out.println("Please select a serial number.");
+            return;
+        }
+
+        String selectedSrNo = (String) selectedSrNoObject;
+        String selectedProject = projectEditorComboBox.getValue();
+
+        if (selectedProject == null) {
+            System.out.println("Please select a project.");
+            return;
+        }
+
+        String csvFileName = selectedProject + ".csv";
+        File file = new File(csvFileName);
+
+        if (!file.exists()) {
+            System.out.println("There is nothing in this project: " + selectedProject);
+            return;
+        }
+
+        // Check if any of the fields are empty
+        if (lifeCycleStepEditorComboBox.getValue() == null || effortCategoryEditorComboBox.getValue() == null ||
+                planEditorComboBox.getValue() == null || deliverableEditorComboBox.getValue() == null ||
+                startTimeTextField.getText().trim().isEmpty()) {
+            System.out.println("Please fill in all the fields before updating the entry.");
+            return;
+        }
+
+        List<String> updatedLines = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                if (columns.length != 8) {
+                    continue;
+                }
+
+                String srNo = columns[0].trim();
+
+                if (srNo.equals(selectedSrNo)) {
+                    // Edit the entry
+                    String[] editedEntry = new String[8];
+                    editedEntry[0] = srNo;
+                    editedEntry[1] = columns[1].trim(); // Keep the existing username
+                    editedEntry[2] = columns[2].trim(); // Keep the existing project name
+                    editedEntry[3] = lifeCycleStepEditorComboBox.getValue();
+                    editedEntry[4] = effortCategoryEditorComboBox.getValue();
+                    editedEntry[5] = planEditorComboBox.getValue();
+                    editedEntry[6] = deliverableEditorComboBox.getValue();
+                    String newElapsedTime = startTimeTextField.getText().trim();
+                    String[] timeParts = newElapsedTime.split(":");
+                    int hours = Integer.parseInt(timeParts[0].trim());
+                    int minutes = Integer.parseInt(timeParts[1].trim());
+                    int seconds = Integer.parseInt(timeParts[2].trim());
+                    String formattedElapsedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                    editedEntry[7] = formattedElapsedTime;
+
+                    updatedLines.add(String.join(",", editedEntry));
+                } else {
+                    updatedLines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading the CSV file: " + csvFileName);
+            e.printStackTrace();
+        }
+
+        // Write the updated data back to the CSV file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFileName))) {
+            for (String line : updatedLines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing the updated data to the CSV file: " + csvFileName);
+            e.printStackTrace();
+        }
+
+        System.out.println("Entry updated successfully!");
     }
+
+
 
     /**
      * This method is called when the user clicks the "Split Entry" button. It prints a message to the console and does not perform any other action.
@@ -312,9 +416,6 @@ public class EffortConsole {
      * @param event the ActionEvent associated with the button click
      * @throws IOException if an IO error occurs while processing the button click
      */
-    public void splitEntryButtonPushed(ActionEvent event) throws IOException{
-        System.out.println("Split Entry Here!");
-    }
 
     /**
      * This method is called when the user clicks the "Print Logs" button. It prints a message to the console and does not perform any other action.
