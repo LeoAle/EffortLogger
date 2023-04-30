@@ -126,7 +126,10 @@ public class HelloController {
     }
 
     public void changeEffortSceneButtonPushed(ActionEvent event) throws IOException {
-        Parent adminViewParent = FXMLLoader.load(getClass().getResource("EffortConsole.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortConsole.fxml"));
+        Parent adminViewParent = loader.load();
+        EffortConsole effortConsoleController = loader.getController();
+        effortConsoleController.setUsername(usernameField.getText());
         Scene adminViewScene = new Scene(adminViewParent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -134,5 +137,6 @@ public class HelloController {
         window.setScene(adminViewScene);
         window.show();
     }
+
 }
 
