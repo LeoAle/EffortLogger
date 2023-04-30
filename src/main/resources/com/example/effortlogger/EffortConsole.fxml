@@ -61,9 +61,9 @@
                   <ComboBox fx:id="planEditorComboBox" layoutX="292.0" layoutY="259.0" promptText="Plan" />
                   <ComboBox fx:id="deliverableEditorComboBox" layoutX="371.0" layoutY="258.0" promptText="Deliverable" />
                   <Label layoutX="17.0" layoutY="298.0" text="4. After modifying press &quot;Update This Entry&quot; when finished." />
-                  <Button fx:id="updateEntryButton" layoutX="17.0" layoutY="326.0" mnemonicParsing="false" text="Update This Entry" />
+                  <Button fx:id="updateEntryButton" layoutX="17.0" layoutY="326.0" mnemonicParsing="false" onAction="#updateEntryButtonPushed" text="Update This Entry" />
                   <Label layoutX="473.0" layoutY="298.0" text="4.a. Split the current entry " />
-                  <Button fx:id="SplitEntryButton" layoutX="473.0" layoutY="326.0" mnemonicParsing="false" text="Split This Entry" />
+                  <Button fx:id="SplitEntryButton" layoutX="473.0" layoutY="326.0" mnemonicParsing="false" onAction="#splitEntryButtonPushed" text="Split This Entry" />
                </children></AnchorPane>
       </content>
     </Tab>
