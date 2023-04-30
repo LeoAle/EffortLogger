@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +18,10 @@ import java.util.List;
 
 public class TeamLeadControl {
 
+    public TableView teamLogsTeamLeaderTableView;
+    public Button logoutTeamLeaderButton;
+    public Button effortLoggerTeamLeaderButton;
+    public Button printTableTeamLeaderButton;
     String username;
     public void setUsername(String username) {
         this.username = username;
@@ -147,4 +153,12 @@ public class TeamLeadControl {
         window.setScene(adminViewScene);
         window.show();
     }
+
+    public void printTableButtonPushed(ActionEvent event){
+        if (printTableTeamLeaderButton.isDefaultButton()){
+            System.out.println("Hello");
+        }
+    }
+    
+    
 }

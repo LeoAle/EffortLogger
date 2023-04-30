@@ -17,5 +17,6 @@
       <TableView fx:id="teamLogsTeamLeaderTableView" layoutX="15.0" layoutY="58.0" prefHeight="235.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <Button fx:id="logoutTeamLeaderButton" layoutX="15.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutButtonPushed" text="Logout" AnchorPane.leftAnchor="15.0" />
       <Button fx:id="effortLoggerTeamLeaderButton" layoutX="15.0" layoutY="350.0" mnemonicParsing="false" onAction="#changeEffortSceneButtonPushed" text="Effort Logger" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="printTableTeamLeaderButton" alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="323.0" mnemonicParsing="false" onAction="#printTableButtonPushed" text="Print Table" />
    </children>
 </AnchorPane>
