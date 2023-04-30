@@ -63,7 +63,6 @@ public class AdminControl {
     }
 
     public void changeSceneAdminNewUserApplyButtonPushed(ActionEvent event) throws IOException {
-
         if (newUserNameTextField.getText().isEmpty()) {
             adminErrorMsg.setVisible(true);
             adminErrorMsg.setText("Name is empty.");
@@ -100,6 +99,28 @@ public class AdminControl {
     End of New User Scene
     ==============================
     */
+
+
+    /*
+    ==============================
+    Beginning of Modify User Scene
+    ==============================
+    */
+    public void changeSceneAdminModifyUser(ActionEvent event) throws IOException {
+        Parent adminNewUserViewParent = FXMLLoader.load(getClass().getResource("AdminControlModifyUser.fxml"));
+        Scene adminNewUserViewScene = new Scene(adminNewUserViewParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(adminNewUserViewScene);
+        window.show();
+    }
+    /*
+    ==============================
+    End of Modify User Scene
+    ==============================
+    */
+
 
     /*
     ==============================
