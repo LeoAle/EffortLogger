@@ -27,6 +27,9 @@ import java.nio.file.StandardOpenOption;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import java.util.Arrays;
 
 public class EffortConsole {
 
@@ -43,8 +46,6 @@ public class EffortConsole {
     @FXML
     private ComboBox<String> deliverableComboBox;
     @FXML
-    private ComboBox<String> projectEditorComboBox;
-    @FXML
     private ComboBox<String> lifeCycleStepEditorComboBox;
     @FXML
     private ComboBox<String> effortCategoryEditorComboBox;
@@ -56,6 +57,8 @@ public class EffortConsole {
     private  Rectangle clockStatusColor;
     @FXML
     private Label clockStatus;
+    @FXML
+    private ComboBox<String> projectEditorComboBox;
 
 
     private boolean isRunning = false;
@@ -77,7 +80,68 @@ public class EffortConsole {
      * Initializes the ComboBox objects in the user interface with the data obtained from a CSV file.
      * The ComboBox items are set from a 2D array of String values obtained by calling the parseCSV method.
      */
-    public void initialize() {
+
+    public void populateSerialNumbers() {
+        String selectedProject = projectEditorComboBox.getValue();
+
+        if (selectedProject == null) {
+            System.out.println("ProjectEditorComboBox is empty. Please select a project.");
+            return;
+        }
+
+        String csvFileName = selectedProject + ".csv";
+        File file = new File(csvFileName);
+        ObservableList<String> serialNumbers = FXCollections.observableArrayList();
+
+        if (!file.exists()) {
+            System.out.println("There is nothing in this project: " + selectedProject);
+        } else {
+            try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
+                String line;
+
+                while ((line = br.readLine()) != null) {
+                    String[] columns = line.split(",");
+
+                    if (columns.length != 8) {
+                        continue;
+                    }
+
+                    String srNo = columns[0].trim();
+                    serialNumbers.add(srNo);
+                }
+            } catch (IOException e) {
+                System.out.println("Error reading the CSV file: " + csvFileName);
+                e.printStackTrace();
+            }
+        }
+
+        effortLogEntryEditorComboBox.setItems(serialNumbers);
+    }
+
+
+    @FXML
+    private void initialize() {
+        // Call the necessary functions for initialization
+        loadComboBoxData();
+        setupProjectEditorComboBox();
+        fillProjectLogsComboBox();
+        fillEditorComboBoxes();
+
+    }
+
+    public void setupProjectEditorComboBox() {
+        projectEditorComboBox.setOnAction(e -> populateSerialNumbers());
+    }
+
+    public void fillEditorComboBoxes() {
+        projectEditorComboBox.setItems(projectComboBox.getItems());
+        lifeCycleStepEditorComboBox.setItems(lifeCycleStepComboBox.getItems());
+        effortCategoryEditorComboBox.setItems(effortCategoryComboBox.getItems());
+        planEditorComboBox.setItems(planComboBox.getItems());
+        deliverableEditorComboBox.setItems(deliverableComboBox.getItems());
+    }
+
+    public void loadComboBoxData() {
         String[][] data = parseCSV("data.csv");
 
         if (data != null && data.length == 5) {
@@ -86,16 +150,7 @@ public class EffortConsole {
             effortCategoryComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[2])));
             planComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[3])));
             deliverableComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[4])));
-            fillProjectLogsComboBox();
-            fillEditorComboBoxes();
         }
-    }
-    public void fillEditorComboBoxes() {
-        projectEditorComboBox.setItems(projectComboBox.getItems());
-        lifeCycleStepEditorComboBox.setItems(lifeCycleStepComboBox.getItems());
-        effortCategoryEditorComboBox.setItems(effortCategoryComboBox.getItems());
-        planEditorComboBox.setItems(planComboBox.getItems());
-        deliverableEditorComboBox.setItems(deliverableComboBox.getItems());
     }
 
 
@@ -212,10 +267,17 @@ public class EffortConsole {
      * The data to save includes the username, project name, life cycle step, effort category,
      * plan, deliverable, and elapsed time.
      */
+    private int recordCounter = 0;
+
     private void saveDataToCSV() {
         String projectName = projectComboBox.getValue();
         String csvFilename = projectName + ".csv";
+
+        // Increment record counter
+        recordCounter++;
+
         String dataToSave = String.join(",",
+                Integer.toString(recordCounter), // Add the serial number
                 username,
                 projectName,
                 lifeCycleStepComboBox.getValue(),
@@ -232,6 +294,7 @@ public class EffortConsole {
             e.printStackTrace();
         }
     }
+
 
     /**
      * This method is called when the user clicks the "Update Entry" button. It prints a message to the console and does not perform any other action.
@@ -273,28 +336,29 @@ public class EffortConsole {
                 try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
                     String line;
                     System.out.println("Logs for project: " + projectName);
-                    System.out.println("----------------------------------------------------------------------------------------------------------------");
-                    System.out.printf("%-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
-                            "Username", "Project", "Life Cycle Step", "Effort Category", "Plan", "Deliverable", "Elapsed Time");
-                    System.out.println("----------------------------------------------------------------------------------------------------------------");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------");
+                    System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                            "Sr. No.", "Username", "Project", "Life Cycle Step", "Effort Category", "Plan", "Deliverable", "Elapsed Time");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------");
 
                     while ((line = br.readLine()) != null) {
                         String[] columns = line.split(",");
 
-                        if (columns.length != 7) {
+                        if (columns.length != 8) {
                             continue;
                         }
 
-                        String username = columns[0].trim();
-                        String project = columns[1].trim();
-                        String lifeCycleStep = columns[2].trim();
-                        String effortCategory = columns[3].trim();
-                        String plan = columns[4].trim();
-                        String deliverable = columns[5].trim();
-                        String elapsedTime = columns[6].trim();
+                        String srNo = columns[0].trim();
+                        String username = columns[1].trim();
+                        String project = columns[2].trim();
+                        String lifeCycleStep = columns[3].trim();
+                        String effortCategory = columns[4].trim();
+                        String plan = columns[5].trim();
+                        String deliverable = columns[6].trim();
+                        String elapsedTime = columns[7].trim();
 
-                        System.out.printf("%-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
-                                username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
+                        System.out.printf("%-5s | %-10s | %-10s | %-20s | %-20s | %-10s | %-20s | %-20s%n",
+                                srNo, username, project, lifeCycleStep, effortCategory, plan, deliverable, elapsedTime);
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading the CSV file: " + csvFileName);
@@ -303,6 +367,7 @@ public class EffortConsole {
             }
         }
     }
+
 
 
 
