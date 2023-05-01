@@ -36,6 +36,7 @@ public class EffortConsole {
     public ComboBox<String> projectDefectConsoleComboBox;
     public Button updateDefectConsoleButton;
     public Button deleteDefectConsoleButton;
+    ////This is the Defect ComboBox for it I think
     public ComboBox<String> defectDefectConsoleComboBox;
     public TextField defectNameDefectConsoleTextField;
     public TextArea symptomsDefectConsoleTextField;
@@ -43,6 +44,8 @@ public class EffortConsole {
     public ComboBox<String> removedDefectConsoleComboBox;
     public ComboBox<String> categoryDefectConsoleComboBox;
     public Button statusDefectConsoleButton;
+    public TextArea defectNameAreaFieldDefectConsole;
+
     @FXML
     private ComboBox<String> projectLogsComboBox;
     @FXML
