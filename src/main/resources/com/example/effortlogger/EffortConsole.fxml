@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -94,7 +92,7 @@
                   <Button fx:id="deleteDefectConsoleButton" layoutX="130.0" layoutY="275.0" mnemonicParsing="false" onAction="#deleteButtonDefectConsole" text="Delete Defect" />
                   <ComboBox fx:id="defectDefectConsoleComboBox" layoutX="150.0" layoutY="70.0" onAction="#defectComboBoxDefectConsole" promptText="Defect" />
                   <TextField fx:id="defectNameDefectConsoleTextField" layoutX="15.0" layoutY="133.0" onAction="#defectNameTextFieldDefectConsole" promptText="Defect Name or Number" />
-                  <TextArea fx:id="symptomsDefectConsoleTextField" layoutX="15.0" layoutY="171.0" onInputMethodTextChanged="#defectSymptomTextFieldDefectConsole" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
+                  <TextArea fx:id="defectNameAreaFieldDefectConsole" layoutX="15.0" layoutY="171.0" onInputMethodTextChanged="#defectSymptomTextFieldDefectConsole" prefHeight="65.0" prefWidth="220.0" promptText="Defect Symptoms or cause/Resolution" />
                   <ComboBox fx:id="injectedDefectConsoleComboBox" layoutX="250.0" layoutY="133.0" onAction="#injectedComboBoxDefectConsole" promptText="Step when injected" />
                   <ComboBox fx:id="removedDefectConsoleComboBox" layoutX="250.0" layoutY="170.0" onAction="#removedComboBoxDefectConsole" promptText="Step when removed " />
                   <ComboBox fx:id="categoryDefectConsoleComboBox" layoutX="250.0" layoutY="210.0" onAction="#categoryComboBoxDefectConsole" promptText="Defect Category" />
@@ -117,15 +115,6 @@
                   <Label layoutX="194.0" layoutY="130.0" text="2. Chose to &quot;Print Logs&quot; or &quot;Delete Logs&quot;" />
                   <Button fx:id="printLogsButton" layoutX="207.0" layoutY="160.0" mnemonicParsing="false" onAction="#printLogsButtonPushed" text="Print Logs" />
                   <Button fx:id="deleteLogsButton" layoutX="312.0" layoutY="160.0" mnemonicParsing="false" onAction="#deleteLogsButtonPushed" text="Delete Logs" />
-                  <TableView layoutX="15.0" layoutY="200.0" prefHeight="160.0" prefWidth="600.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
                </children>
             </AnchorPane>
         </content>

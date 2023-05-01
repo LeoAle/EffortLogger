@@ -5,16 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -35,6 +33,16 @@ import java.util.List;
 
 public class EffortConsole {
 
+    public ComboBox<String> projectDefectConsoleComboBox;
+    public Button updateDefectConsoleButton;
+    public Button deleteDefectConsoleButton;
+    public ComboBox<String> defectDefectConsoleComboBox;
+    public TextField defectNameDefectConsoleTextField;
+    public TextArea symptomsDefectConsoleTextField;
+    public ComboBox<String> injectedDefectConsoleComboBox;
+    public ComboBox<String> removedDefectConsoleComboBox;
+    public ComboBox<String> categoryDefectConsoleComboBox;
+    public Button statusDefectConsoleButton;
     @FXML
     private ComboBox<String> projectLogsComboBox;
     @FXML
@@ -69,7 +77,7 @@ public class EffortConsole {
     private String username;
 
     //New GUI Elements
-    public ComboBox effortLogEntryEditorComboBox;
+    public ComboBox<String> effortLogEntryEditorComboBox;
     public TextField startTimeTextField;
     public Button updateEntryButton;
     public Label attributeStatusLabel;
@@ -146,7 +154,7 @@ public class EffortConsole {
     }
 
     public void loadComboBoxData() {
-        String[][] data = parseCSV("data.csv");
+        String[][] data = parseCSV();
 
         if (data != null && data.length == 5) {
             projectComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[0])));
@@ -170,13 +178,12 @@ public class EffortConsole {
     /**
      * Parses a CSV file and returns a 2D String array containing the data.
      *
-     * @param filename the name of the CSV file to parse
      * @return a 2D String array containing the parsed data
      */
-    private String[][] parseCSV(String filename) {
+    private String[][] parseCSV() {
         String[][] data = new String[5][];
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("data.csv"))) {
             String line;
             int rowIndex = 0;
             while ((line = br.readLine()) != null) {
@@ -218,10 +225,8 @@ public class EffortConsole {
      * starts the stopwatch if it is not already running, or stops the stopwatch and saves the elapsed time to
      * a CSV file if it is running. If any combo box does not have a selected value, displays an error message.
      *
-     * @param event the ActionEvent generated when the button is pushed
-     * @throws IOException if there is an error saving data to the CSV file
      */
-    public void startStopButtonPushed(ActionEvent event) throws IOException {
+    public void startStopButtonPushed(){
         if (isAllComboBoxesSelected()) {
             if (!isRunning) {
                 // Start the stopwatch
@@ -271,7 +276,7 @@ public class EffortConsole {
      * The data to save includes the username, project name, life cycle step, effort category,
      * plan, deliverable, and elapsed time.
      */
-    private int recordCounter = 0;
+    private final int recordCounter = 0;
 
     private void saveDataToCSV() {
         String projectName = projectComboBox.getValue();
@@ -411,14 +416,6 @@ public class EffortConsole {
     }
 
 
-
-    /**
-     * This method is called when the user clicks the "Split Entry" button. It prints a message to the console and does not perform any other action.
-     *
-     * @param event the ActionEvent associated with the button click
-     * @throws IOException if an IO error occurs while processing the button click
-     */
-
     /**
      * This method is called when the user clicks the "Print Logs" button. It prints a message to the console and does not perform any other action.
      *
@@ -508,43 +505,42 @@ public class EffortConsole {
         }
     }
 
-    public void projectComboBoxDefectConsole(ActionEvent event) throws IOException{
+    public void projectComboBoxDefectConsole(ActionEvent event){
         System.out.println("I am the Project Combo Box");
     }
 
-    public void defectComboBoxDefectConsole(ActionEvent event) throws IOException{
+    public void defectComboBoxDefectConsole(ActionEvent event) {
         System.out.println("I am the Defect Combo Box");
     }
 
-    public void injectedComboBoxDefectConsole(ActionEvent event) throws IOException{
+    public void injectedComboBoxDefectConsole(ActionEvent event) {
         System.out.println("I am the Step when Injected Combo Box");
     }
-    public void removedComboBoxDefectConsole(ActionEvent event) throws IOException{
+    public void removedComboBoxDefectConsole(ActionEvent event) {
         System.out.println("I am the Step when removed Combo Box");
     }
 
-    public void categoryComboBoxDefectConsole(ActionEvent event) throws IOException{
+    public void categoryComboBoxDefectConsole(ActionEvent event) {
         System.out.println("I am the Defect Category Combo Box");
     }
 
-    public void statusButtonDefectConsole(ActionEvent event) throws IOException{
+    public void statusButtonDefectConsole(ActionEvent event) {
         System.out.println("I am the Open or Closed Button");
     }
 
-    public void updateButtonDefectConsole(ActionEvent event) throws IOException{
+    public void updateButtonDefectConsole(ActionEvent event) {
         System.out.println("I am the Update Defect Button");
     }
 
-    public void deleteButtonDefectConsole(ActionEvent event) throws IOException{
+    public void deleteButtonDefectConsole(ActionEvent event) {
         System.out.println("I am the Delete Defect Button");
     }
 
-    public void defectNameTextFieldDefectConsole(ActionEvent event) throws IOException{
-        System.out.println("I am the Defect Name Text Field");
-    }
-
-    public void defectSymptomTextFieldDefectConsole(ActionEvent event) throws IOException{
+    public void defectSymptomTextFieldDefectConsole(InputMethodEvent event) {
         System.out.println("I am the Defect Symptom Text Field");
     }
 
+    public void defectNameTextFieldDefectConsole(ActionEvent event) {
+        System.out.println("I am the Defect Name Area Field");
+    }
 }
