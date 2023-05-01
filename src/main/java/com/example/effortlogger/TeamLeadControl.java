@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 public class TeamLeadControl {
 
-    public TableView teamLogsTeamLeaderTableView;
     public Button logoutTeamLeaderButton;
     public Button effortLoggerTeamLeaderButton;
     public Button printTableTeamLeaderButton;
