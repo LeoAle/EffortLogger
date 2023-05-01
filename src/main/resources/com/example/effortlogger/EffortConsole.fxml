@@ -123,7 +123,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" />
+                  <Button fx:id="LogoutBtn" layoutX="289.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeSceneButtonPushed" text="Logout" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="280.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="76.0" text="Effort Logger Sign Out" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </content>
