@@ -132,12 +132,13 @@ public class EffortConsole {
 
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         // Call the necessary functions for initialization
         loadComboBoxData();
         setupProjectEditorComboBox();
         fillProjectLogsComboBox();
         fillEditorComboBoxes();
+        fillDefectComboBoxes();
 
     }
 
@@ -151,6 +152,32 @@ public class EffortConsole {
         effortCategoryEditorComboBox.setItems(effortCategoryComboBox.getItems());
         planEditorComboBox.setItems(planComboBox.getItems());
         deliverableEditorComboBox.setItems(deliverableComboBox.getItems());
+    }
+
+    public void fillDefectComboBoxes() throws IOException {
+        List<String> comboBoxData = readComboBoxData("combobox.csv");
+
+        ObservableList<String> injectedDefects = FXCollections.observableArrayList(comboBoxData.get(0).split(","));
+        ObservableList<String> removedDefects = FXCollections.observableArrayList(comboBoxData.get(1).split(","));
+        ObservableList<String> categories = FXCollections.observableArrayList(comboBoxData.get(2).split(","));
+
+        injectedDefectConsoleComboBox.setItems(injectedDefects);
+        removedDefectConsoleComboBox.setItems(removedDefects);
+        categoryDefectConsoleComboBox.setItems(categories);
+        projectDefectConsoleComboBox.setItems(projectComboBox.getItems());
+    }
+
+    public List<String> readComboBoxData(String fileName) throws IOException {
+        List<String> comboBoxData = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                comboBoxData.add(line);
+            }
+        }
+
+        return comboBoxData;
     }
 
     public void loadComboBoxData() {
