@@ -5,3 +5,6 @@
 5,Keval,ProjectA,Design,Documentation,Plan C,Deliverable B,00:00:00
 6,Bob,ProjectA,Design,Testing,Plan C,Deliverable B,00:00:00
 7,null,ProjectA,Design,Testing,Plan B,Deliverable B,00:00:02
+8,Carter,ProjectA,Design,Testing,Plan A,Deliverable B,00:00:15
+9,Carter,ProjectA,Design,Development,Plan A,Deliverable A,00:00:04
+10,Robert,ProjectA,Design,Testing,Plan B,Deliverable A,00:00:47
