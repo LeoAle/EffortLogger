@@ -31,6 +31,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class EffortConsole {
 
     public ComboBox<String> projectDefectConsoleComboBox;
@@ -142,7 +143,6 @@ public class EffortConsole {
         fillProjectLogsComboBox();
         fillEditorComboBoxes();
         fillDefectComboBoxes();
-
     }
 
     public void setupProjectEditorComboBox() {
@@ -194,6 +194,58 @@ public class EffortConsole {
             deliverableComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(data[4])));
         }
     }
+// ...
+
+// ...
+
+    public void projectComboBoxDefectConsole(ActionEvent event) {
+        String projectName = projectDefectConsoleComboBox.getSelectionModel().getSelectedItem();
+        if (projectName == null) {
+            return;
+        }
+
+        String projectFileName = projectName + "defect.csv";
+
+        if (!Files.exists(Paths.get(projectFileName))) {
+            try {
+                createDefectFile(projectFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<String> defectData;
+        try {
+            defectData = readDefectData(projectFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ObservableList<String> defects = FXCollections.observableArrayList(defectData);
+        defectDefectConsoleComboBox.setItems(defects);
+    }
+
+    private void createDefectFile(String projectFileName) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(projectFileName))) {
+            writer.write("Create a new defect");
+            writer.newLine();
+        }
+    }
+
+    public List<String> readDefectData(String fileName) throws IOException {
+        List<String> defectData = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                defectData.add(line);
+            }
+        }
+
+        return defectData;
+    }
+
 
 
     /**
@@ -535,9 +587,6 @@ public class EffortConsole {
         }
     }
 
-    public void projectComboBoxDefectConsole(ActionEvent event){
-        System.out.println("I am the Project Combo Box");
-    }
 
     public void defectComboBoxDefectConsole(ActionEvent event) {
         System.out.println("I am the Defect Combo Box");
