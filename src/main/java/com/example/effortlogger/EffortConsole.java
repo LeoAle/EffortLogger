@@ -40,13 +40,14 @@ public class EffortConsole {
     ////This is the Defect ComboBox for it I think
     public ComboBox<String> defectDefectConsoleComboBox;
     public TextField defectNameDefectConsoleTextField;
-    public TextArea symptomsDefectConsoleTextField;
     public ComboBox<String> injectedDefectConsoleComboBox;
     public ComboBox<String> removedDefectConsoleComboBox;
     public ComboBox<String> categoryDefectConsoleComboBox;
     public Button statusDefectConsoleButton;
     public TextArea defectNameAreaFieldDefectConsole;
 
+    @FXML
+    public TextArea symptomsDefectConsoleTextField;
     @FXML
     private ComboBox<String> projectLogsComboBox;
     @FXML
@@ -222,9 +223,16 @@ public class EffortConsole {
             return;
         }
 
-        ObservableList<String> defects = FXCollections.observableArrayList(defectData);
+        List<String> defectNames = new ArrayList<>();
+        for (String line : defectData) {
+            String[] parts = line.split(",");
+            defectNames.add(parts[0].trim()); // Get the first column (defect name)
+        }
+
+        ObservableList<String> defects = FXCollections.observableArrayList(defectNames);
         defectDefectConsoleComboBox.setItems(defects);
     }
+
 
     private void createDefectFile(String projectFileName) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(projectFileName))) {
@@ -233,18 +241,6 @@ public class EffortConsole {
         }
     }
 
-    public List<String> readDefectData(String fileName) throws IOException {
-        List<String> defectData = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                defectData.add(line);
-            }
-        }
-
-        return defectData;
-    }
 
 
 
@@ -608,8 +604,45 @@ public class EffortConsole {
     }
 
     public void updateButtonDefectConsole(ActionEvent event) {
-        System.out.println("I am the Update Defect Button");
+        String projectName = projectDefectConsoleComboBox.getSelectionModel().getSelectedItem();
+        String defectName = defectDefectConsoleComboBox.getSelectionModel().getSelectedItem();
+
+        if (projectName == null || defectName == null) {
+            return;
+        }
+
+        String newDescription = symptomsDefectConsoleTextField.getText();
+
+        updateDefect(projectName, defectName, newDescription);
     }
+
+
+
+
+    private List<String> readDefectData(String projectFileName) throws IOException {
+        List<String> defectData = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectFileName))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                defectData.add(line);
+            }
+        }
+
+        return defectData;
+    }
+
+    private void writeDefectData(String projectFileName, List<String> defectData) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(projectFileName))) {
+            for (String line : defectData) {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+    }
+
+
 
     public void deleteButtonDefectConsole(ActionEvent event) {
         System.out.println("I am the Delete Defect Button");
@@ -617,7 +650,62 @@ public class EffortConsole {
 
     public void defectSymptomTextFieldDefectConsole(InputMethodEvent event) {
         System.out.println("I am the Defect Symptom Text Field");
+
+        // Read the text from the symptomsDefectConsoleTextField
+        String description = symptomsDefectConsoleTextField.getText();
+
+        // Check if the description is not empty
+        if (!description.isEmpty()) {
+            // Get the selected project and defect
+            String selectedProject = projectDefectConsoleComboBox.getValue();
+            String selectedDefect = defectDefectConsoleComboBox.getValue();
+
+            if (selectedProject != null && selectedDefect != null) {
+                // Update the defect based on the new description
+                updateDefect(selectedProject, selectedDefect, description);
+            } else {
+                System.out.println("Please select a project and a defect.");
+            }
+        } else {
+            System.out.println("Please enter a description.");
+        }
     }
+
+    public void updateDefect(String selectedProject, String selectedDefect, String newDescription) {
+        String projectFileName = selectedProject + "defect.csv";
+        List<String[]> defectData = new ArrayList<>();
+
+        // Read the existing data from the CSV file
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectFileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                defectData.add(parts);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Update the defect description
+        for (String[] row : defectData) {
+            if (row[0].equals(selectedDefect)) {
+                row[1] = newDescription;
+                break;
+            }
+        }
+
+        // Write the updated data back to the CSV file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(projectFileName))) {
+            for (String[] row : defectData) {
+                writer.write(String.join(",", row));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void defectNameTextFieldDefectConsole(ActionEvent event) {
         System.out.println("I am the Defect Name Area Field");
